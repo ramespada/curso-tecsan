@@ -1,0 +1,31 @@
+# Setup
+title: 'curso-tecsann'
+url: https://ramespada.github.io
+baseurl: /curso-tecsan
+# Settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+highlighter: rouge
+#permalink: /:title/
+future: true
+# safe: true # breaks local rendering if enabled
+timezone: America/Argentina/Buenos_Aires
+#analytics:
+#  tracking_id: G-P7WVHD84D1
+
+collections:
+  'clases':
+    output: true
+  'ejemplos':
+    output: false
+  'material':       
+    output: true
+
+# Excludes
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
