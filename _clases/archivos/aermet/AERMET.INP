@@ -1,0 +1,58 @@
+**--------------------**
+** AERMET.INP-MCA2023 ** 
+**____________________**
+
+** ETAPA 1: Lectura y procesamiento de datos de entrada.
+
+JOB
+    MESSAGES MENSAJE.MSG
+    REPORT   REPORTE.RPT
+
+**    Datos horarios de superficie:
+
+SURFACE
+
+    DATA       SFC_MODIF.ISH ISHD
+    XDATES     2021/12/01 TO 2021/12/31
+    LOCATION   87576  34.820S  058.583W  3  +0003
+    AUDIT      WDIR WSPD TSKC RHUM TMPD
+    QAOUT      QA_SFC.OUT
+
+**    Datos de sondeos verticales:
+
+UPPERAIR
+
+    DATA       UA_FULL_DEC21.FSL FSL
+    XDATES     2021/12/01 TO 2021/12/31
+    LOCATION   87576  34.82S  58.53W  3
+    AUDIT      UAPR  UAHT  UATT  UATD  UAWD  UAWS
+    QAOUT      QA_UA.OUT
+
+** ETAPA 2 - Estimación de parametros de la capa límite y creación de .SFC y .PFL
+
+METPREP
+
+    XDATES     2021/12/01 TO 2021/12/31
+    NWS_HGT  WIND      10.0
+
+** Métodos para precesamiento de datos:
+    METHOD   WIND_DIR  RANDOM
+    METHOD   UASELECT SUNRISE
+    METHOD   REFLEVEL  SUBNWS
+
+** Nombres de archivos de salida
+        
+    OUTPUT      PRUEBA.SFC
+    PROFILE     PRUEBA.PFL
+
+    
+
+** Parámetros de superficie
+
+    FREQ_SECT ANNUAL 1
+    SECTOR   1  0   360
+**-------------------------------------------------|
+**           | season | section | a0  | b0  | z0   |
+**-----------|--------|---------|-----|-----|------|
+    SITE_CHAR    1        1      0.16  0.80  0.54
+**-----------|--------|---------|-----|-----|------|
