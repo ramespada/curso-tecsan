@@ -1,0 +1,95 @@
+\subtitle{Interacción de la pluma con el entorno}
+ \begin{frame}{}
+     \maketitle
+ \end{frame}
+
+
+
+\begin{frame}{Ascenso de pluma}
+Hay dos tipos de procesos que generan el ascenso de una pluma:
+\begin{itemize}
+    \item Ascenso mecánico: por transferencia de momentum.
+    \item Flotación/Empuje (bouyancy): debido a la diferencia de temperaturas entre el efluente y la atmósfera.
+\end{itemize}
+
+
+Parámetro de flujo:
+    $$ F_m = (\frac{\overline{\rho_s}}{\rho}) r^2 \overline{w}^2   \qquad F_b = (1-\frac{\overline{\rho_s}}{\rho})g r^2 \overline{w}^2  $$
+    
+Ascenso:
+    $$ \Delta z = 2 \bigg( \dfrac{F_m x}{\overline{u}^2} \bigg)^{1/3} \qquad    \Delta z = 1.6 \bigg( \dfrac{F_b x^2}{\overline{u}^3}  \bigg)^{1/3}    $$
+    
+    $$ \Delta h = 2.4^{1/4} \bigg( \dfrac{F_m}{s}\bigg)^{1/4}  \qquad  \Delta h = 5.3^{1/4} \bigg( \dfrac{F_b^2}{s^3} \bigg)^{1/8} $$
+    
+\end{frame}
+
+
+% \begin{frame}{Velocidad crítica}
+%     La velocidad de la pluma afecta las concentraciones de dos formas antagónicas:
+%     \begin{itemize}
+%         \item Disminuye las concnentraciones ya que estira la pluma.
+%         \item Aumenta las concentraciones en superficie por que decrece el acenso de la pluma.
+%     \end{itemize}
+    
+%     El balance entre estos dos procesos hace que exista un valor máximo de concentraciones a una velocidad dada, conocida como "velocidad crítica".
+    
+    
+% \end{frame}
+
+\begin{frame}{Downwash}
+    
+    Ocurre por interferencia de la pluma con edificios aledaños.
+    La pluma es atrapada por sombras turbulentas que se generan en las caras opuestas al viento de edificios.
+    
+    $$ \Delta h = 2 d_{s} ( \dfrac{w_s}{u} - 1.5 ) $$
+    
+\end{frame}
+
+
+\begin{frame}{Downwash}{Deflexión de la pluma}
+\begin{itemize}
+    \item (A) Upwind, no afectado por edificios, $dz/dx=0$
+    \item (B) Upwind, afectado por edificio:
+    $$ \dfrac{dz}{dx}= \dfrac{2(H_R-H)(x+R)}{R^2}$$
+    \item (C) Downwind, antes de cabidad
+    $$ \dfrac{dz}{dx}= \dfrac{-4(H_R-H)(2x+R-1)}{R}$$
+
+    \item (D) Downwind, sobre la cabidad
+    $$ \dfrac{dz}{dx}= \dfrac{(H_R-H)(R-2x)}{(L+L_R - R/2)^2}(\dfrac{z}{H})^{0.3}$$
+
+    \item (E)  Downwind, despues de la cabidad
+    $$ \dfrac{dz}{dx}= \dfrac{-(H_R-H)(L+L_R)}{x(L+L_R - R/2)}(\dfrac{z}{H})^{0.3}$$
+
+    
+
+\end{itemize}{}
+
+\end{frame}
+
+
+\begin{frame}{Deposicion}{Seca}
+    
+    $$F = - \nu_d c $$
+    donde:
+    $$\dfrac{1}{\nu_d} = r_T = r_a + r_b + r_c $$
+    
+    
+    Ley de Stokes:
+    $$ \nu_s = \dfrac{\rho d^2 g}{18\mu}$$
+\end{frame}
+
+
+\begin{frame}{Deposcion}{Humeda}
+    
+    
+    $$\Lambda = \lambda \dfrac{R}{R_1} $$
+    
+    
+    $$\exp \bigg[ - \Lambda t \bigg] $$
+\end{frame}
+
+
+\begin{frame}{Interaccion con el terreno}
+    El perfil de vientos en terrenos densamente poblados de obstaculos se puede estimar:\footnote{}
+    $$ u = \frac{u_*}{k} \ln{}\dfrac{z-d}{z_0}$$
+\end{frame}

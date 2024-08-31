@@ -1,0 +1,737 @@
+\usetikzlibrary{shapes.geometric,matrix, calc, patterns, angles, quotes, babel, snakes, 3d, intersections,hobby,positioning, fadings,decorations.pathreplacing,decorations.pathmorphing,er,calc,backgrounds,shapes,arrows,arrows.meta, shadows}
+
+%\usetikzlibrary{babel}%[spanish]
+%\usepackage{circuitikz} %simbolos de circuitos
+%\ctikzset{bipoles/length=.4cm}
+
+%Global options:
+\tikzset{color=blue,fill=blue!50,text=black!80}
+\tikzset{water/.style={draw, blue, opacity=0.4, outer color=blue, inner color=blue!30},
+solid/.style={draw,black!80,opacity=0.8, outer color=black!30, inner color=black!10},
+ground/.style={fill,pattern=north east lines,draw=none,minimum width=0.3,minimum height=0.},
+surface/.style={fill,pattern=north east lines,minimum width=0.3,minimum height=0.5},
+atmosphere/.style={draw, blue, opacity=0.5, outer color=blue!10, inner color=blue!50},
+sun/.style={draw, yellow, opacity=0.5, outer color=yellow!20, inner color=orange!10},
+cloud/.style={draw, gray!10, opacity=0.5, outer color=white, inner color=gray!40},
+rock/.style={fill,pattern=dots},
+building/.style={fill,pattern=bricks, pattern color=black!70}
+}
+\tikzset{earth/.style={draw, blue, opacity=0.4, outer color=blue, inner color=green!70},
+water/.style={draw, blue, opacity=0.4, outer color=blue, inner color=blue!30},
+solid/.style={draw,black!80,opacity=0.8, outer color=black!30, inner color=black!10},
+ground/.style={fill,pattern=north east lines,draw=none},%,minimum width=0.3,minimum height=0.5
+}
+\tikzset{every pipe/.code={%
+  \pgfmathloop
+  \ifnum\pgfmathcounter>20
+  \else
+    \pgfmathsetmacro\i{\pgfmathcounter}%
+    \pgfmathsetmacro\j{80-\pgfmathcounter*3}%
+    \tikzset{preaction/.expanded={line width=(\pipewidth)*(1-\i*\i/500),
+        draw=black!50!white!\j!white}}%
+  \repeatpgfmathloop
+},
+every flange/.style 2 args={insert path={
+  let \p1=(#1), \p2=(#2),\n1={atan2(\y2-\y1, \x2-\x1)} in
+    [shift={(\p1)}, rotate=\n1, pipe width={(\pipewidth)*4/3}, every pipe] 
+      (0.01,0) -- (0.2,0)
+}},
+flanges/.style={postaction={%
+  /utils/exec={
+    \@for\pos:=#1\do{%
+      \tikzset{decoration/.expanded={markings,
+        mark=at position \pos\space with {
+          \noexpand\path [pipe width=\pipewidth*4/3, every pipe] (0.01,0) -- (0.2,0);
+    }}}}}, 
+  decorate}},
+pipe width/.code=\pgfmathsetlengthmacro\pipewidth{#1},
+pipes/.style={
+  every pipe,
+  postaction={decoration={show path construction,
+    lineto code={
+      \path [every flange={\tikzinputsegmentfirst}{\tikzinputsegmentlast}];
+      \path [every flange={\tikzinputsegmentlast}{\tikzinputsegmentfirst}];
+    },
+    curveto code={
+      \path [every flange={\tikzinputsegmentfirst}{\tikzinputsegmentsupporta}];
+      \path [every flange={\tikzinputsegmentlast}{\tikzinputsegmentsupportb}];
+    }
+}, decorate}},
+pipe/.style={
+  every pipe,
+  flanges={0, 1}
+}}
+\tikzstyle{myarrows}=[line width=1mm,draw=blue,-triangle 45,postaction={draw, line width=3mm, shorten >=4mm, -}]
+       
+\tikzoption{canvas is plane}[]{\@setOxy#1}
+  \def\@setOxy O(#1,#2,#3)x(#4,#5,#6)y(#7,#8,#9)%
+    {\def\tikz@plane@origin{\pgfpointxyz{#1}{#2}{#3}}%
+     \def\tikz@plane@x{\pgfpointxyz{#4}{#5}{#6}}%
+     \def\tikz@plane@y{\pgfpointxyz{#7}{#8}{#9}}%
+     \tikz@canvas@is@plane
+  }
+
+%Linea desprolija tipo a mano
+\tikzstyle{randomLine}=[decorate,decoration={random steps,amplitude=0.5pt}]
+
+%\newcommand\esymbol[1]{\begin{circuitikz}
+%\ctikzset{bipoles/length=.6cm}
+%\draw (0,0) to [#1] (.75,0); \end{circuitikz}}
+
+
+
+%Ejes 2D:
+\newcommand\axisDD[2]{
+      \draw[->,xshift=#2,thick](0,0)--(#1,0) node[anchor=north]{$\hat{x}$};
+      \draw[->,xshift=#2,thick](0,0)--(0,#1) node[anchor=east]{$\hat{y}$};
+      \fill[black,xshift=#2](0,0)circle[radius=0.075]node[black,anchor=north]{$\mathbf{o}$};
+}
+%Ejes 3D:
+
+%Ejes 3D:
+\newcommand\axisDDD[3]{
+      \draw[-stealth,very thick,black!80,xshift=#2,yshift=#3](0,0,0)--(#1,0,0) node[anchor=north]{$\hat{x}$};
+      \draw[-stealth,very thick,black!80,xshift=#2,yshift=#3](0,0,0)--(0,0,#1) node[anchor=east]{$\hat{y}$};
+      \draw[-stealth,very thick,black!80,xshift=#2,yshift=#3](0,0,0)--(0,#1,0) node[anchor=east] {$\hat{z}$};
+      \fill[black!80,xshift=#2,yshift=#3](0,0)circle[radius=0.05];%node[black,anchor=north]{$\mathbf{o}$};
+}
+%\newcommand\axisDDD[2]{
+%      \draw[->,xshift=#2,thick](0,0,0)--(#1,0,0) node[anchor=north]{$\hat{x}$};
+%      \draw[->,xshift=#2,thick](0,0,0)--(0,#1,0) node[anchor=east] {$\hat{y}$};
+%      \draw[->,xshift=#2,thick](0,0,0)--(0,0,#1) node[anchor=north]{$\hat{z}$};
+%      \fill[black,xshift=#2](0,0)circle[radius=0.075]node[black,anchor=north]{$\mathbf{o}$};
+%}
+%Ejemplo de cuerpo rígido
+\newcommand\cuerporigidoA{\draw[fill=black!10,thick] plot[smooth cycle , tension=.7,fill=black!10]coordinates{
+%(-0.72, -0.03)
+(-1.05, 0.)(-1.32, 0.29) (-1.41, 0.85) (-1.46, 1.4) (-1.24, 1.6) (-0.81, 1.56) (-0.39, 1.28) (0.15, 1.21) (0.39, 0.54)(-0.07, -0.16) (-0.46, -0.2) };}
+
+
+\newcommand\cuerporigidoB{\draw[fill=black!10] plot[smooth cycle , tension=.8,fill=black!10]coordinates{(-0.59, -0.08)(-1.08, 0.)(-1.39, 0.1)(-1.63, 0.59)(-1.66, 1.1)(-1.53, 1.54)(-1.41, 2.0)(-1.13, 2.31)(-0.65, 2.37)(-0.27, 2.16)(-0.1, 1.7)(-0.1, 1.1)(-0.11, 0.52)
+(-0.19, 0.12)
+};}
+
+
+\newcommand\padDardos[2]{
+      \draw[black!50, very thin] (#1,#2)	circle [radius=.2];
+      \draw[black!50, thin](#1,#2) 		circle [radius=.3];
+      \draw[black!50, ](#1,#2) 			circle [radius=.4];
+      \draw[black!50, thick](#1,#2) 		circle [radius=.5];
+      \draw[black!50,      thick](#1,#2)  circle [radius=.6];
+      \draw[black!50, very thick](#1,#2)  circle [radius=.7];
+      \fill[red!80] (#1,#2) circle[radius=0.1];
+}
+
+\newcommand\CubeDDD[2]{
+        \draw[#2](-#1,-#1,-#1)--(-#1, #1,-#1)--(-#1,#1,#1)--(-#1,-#1,#1)--(-#1,-#1,-#1);
+        \draw[#2](-#1,-#1,-#1)--( #1,-#1,-#1)--(#1,-#1,#1)--(-#1,-#1,#1)--(-#1,-#1,-#1);
+        \draw[#2](-#1,-#1,-#1)--(#1,-#1,-#1)--(#1,#1,-#1)--(-#1,#1,-#1)--(-#1,-#1,-#1);
+        \draw[#2](#1,#1,#1)--(#1,-#1,#1)--(#1,-#1,-#1)--(#1,#1,-#1)--(#1,#1,#1);
+        \draw[#2](#1,#1,#1)--(-#1,#1,#1)--(-#1,#1,-#1)--(#1,#1,-#1)--(#1,#1,#1);
+        \draw[#2](#1,#1,#1)--(-#1,#1,#1)--(-#1,-#1,#1)--(#1,-#1,#1)--(#1,#1,#1);
+%		% inside frame - this shouldn't be necessary...
+%         \draw(-#1,-#1,-#1)--(-#1,#1,-#1)--(-#1,#1,#1)--(-#1,-#1,#1)--(-#1,-#1,-#1);
+%         \draw(-#1,-#1,-#1)--(#1,-#1,-#1)--(#1,-#1,#1)--(-#1,-#1,#1)--(-#1,-#1,-#1);
+%         \draw(-#1,-#1,-#1)--(#1,-#1,-#1)--(#1,#1,-#1)--(-#1,#1,-#1)--(-#1,-#1,-#1);
+}
+       
+\newcommand\roughLine[4]{%xstart,xend,samples,amplitude
+			\draw plot[domain=#1:#2, samples=#3] ({\x},{rand*#4});
+}
+
+\newcommand\irregularcircle[2]{% radius, irregularity
+  \pgfextra {\pgfmathsetmacro\len{(#1)+rand*(#2)}}
+  +(0:\len pt)
+  \foreach \a in {10,20,...,350}{
+    \pgfextra {\pgfmathsetmacro\len{(#1)+rand*(#2)}}
+    -- +(\a:\len pt)
+  } -- cycle
+}
+
+
+
+% C H E M :
+\newcommand\CHEMnetwork{
+
+%Nodes
+\node [vspecies] (S) {$X_0$};
+\node [vspecies, right of = S] (X1) {$X_{1}$};
+\node [vspecies, right of = X1] (X2) {$X_{2}$};
+\node [vspecies, above right of = X2] (X3) {$X_{3}$};
+\node [vspecies, below right of = X2] (X4) {$X_{4}$};
+\node [vspecies, right of = X3] (X5) {$X_{5}$};
+\node [vspecies, right of = X4] (X6) {$X_{6}$};
+%Arows
+\draw [<->,thick] (S) --  node {$k_{01}$} (X1) ;
+\draw [<->,thick] (X1) --  node {$k_{12}$}(X2);
+\draw [<->,thick] (X2) --  node {$k_{23}$}(X3);
+\draw [<->,thick] (X2) --  node {$k_{24}$}(X4);
+\draw [<->,thick] (X3) --  node {$k_{35}$}(X5) ;
+\draw [<->,thick] (X4) --  node {$k_{46}$}(X6);
+
+\draw [<->,thick] (X1) --  node[anchor=north] {$k_{14}$}(X4);
+\draw [<->,thick] (S) to[out=40,in=170]  node[anchor=north] {$k_{03}$}(X3);
+\draw [<->,thick] (X2) --  node[anchor=north] {$k_{25}$}(X5);
+}
+
+
+\newcommand\MeshLayers{
+
+    % %slanting: production of a set of n 'laminae' to be piled up. N=number of grids.
+    % \begin{scope}[
+    % 	yshift=170,every node/.append style={
+    % 	    yslant=0.5,xslant=-1},yslant=0.5,xslant=-1
+    % 	  ]
+    %     \fill[white,fill opacity=0.6] (0,0) rectangle (5,5);
+    %     \draw[step=10mm, black] (2,2) grid (5,5);
+    %     \draw[step=2mm, green] (2,2) grid (3,3);
+    %     \draw[black,very thick] (2,2) rectangle (5,5);
+    %     \draw[black,dashed] (0,0) rectangle (5,5);
+    % \end{scope}
+    	
+    	
+
+    % \begin{scope}[
+    % 	yshift=90,every node/.append style={
+    % 	yslant=0.5,xslant=-1},yslant=0.5,xslant=-1
+    % 	             ]
+    % 	\fill[white,fill opacity=.9] (0,0) rectangle (5,5);
+    % 	\draw[step=10mm, black] (1,1) grid (4,4);
+    % 	\draw[black,very thick] (1,1) rectangle (4,4);
+    % 	\draw[black,dashed] (0,0) rectangle (5,5);
+    % \end{scope}
+     \begin{scope}[
+        yshift=-170,every node/.append style={
+        yslant=0.5,xslant=-1},yslant=0.5,xslant=-1
+                  ]
+        %marking border
+        \draw[black,very thick] (0,0) rectangle (5,5);
+
+       	%drawing corners (P1,P2, P3): only 3 points needed to define a plane.
+        \draw [fill=blue](0,0) circle (.1) ;
+        \draw [fill=blue](0,5) circle (.1);
+        \draw [fill=blue](5,0) circle (.1);
+        \draw [fill=blue](5,5) circle (.1);
+
+        %drawing bathymetric hypotetic countours on the bottom grid:    	
+        \draw [ultra thick,black!70](0,1) parabola bend (2,2) (5,1)  ;
+        \draw [dashed] (0,1.5) parabola bend (2.5,2.5) (5,1.5) ;
+        \draw [dashed] (0,2) parabola bend (2.7,2.7) (5,2)  ;
+        \draw [dashed] (0,2.5) parabola bend (3.5,3.5) (5,2.5)  ;
+        \draw [dashed] (0,3.5)  parabola bend (2.75,4.5) (5,3.5);
+        \draw [dashed] (0,4)  parabola bend (2.75,4.8) (5,4);
+        \draw [dashed] (0,3)  parabola bend (2.75,3.8) (5,3);
+        \draw[thick](1,1)node[right]{$\mathsf{Tierra}$};
+        \draw[thick](1,4)node[right]{$\mathsf{Mar}$};
+    \end{scope} %end of drawing grids
+
+      \begin{scope}[
+            yshift=-83,every node/.append style={
+            yslant=0.5,xslant=-1},yslant=0.5,xslant=-1
+            ]
+    	\draw[blue,dashed,fill=blue!10,opacity=0.7] (0,0) rectangle (5,5);
+        \draw[blue,thick](1,2.5)node[right]{$\mathsf{Dominio}$};
+    \end{scope}  	
+
+    	
+    \begin{scope}[
+        yshift=0,every node/.append style={
+     	yslant=0.5,xslant=-1},yslant=0.5,xslant=-1]
+        % opacity to prevent graphical interference
+        \fill[white,fill opacity=0.9] (0,0) rectangle (5,5);
+        \draw[step=5mm, blue] (0,0) grid (5,5); %defining grids
+        %\draw[step=1mm, blue!50,thin] (3,1) grid (4,2);  %Nested Grid
+        \draw[black!70,very thick] (0,0) rectangle (5,5);%marking borders
+        \fill[blue!70] (0.075,0.075) rectangle (0.425,0.425);
+        %Idem as above, for the n-th grid:
+    \end{scope}
+    
+    %putting arrows and labels:
+    \node[blue] at (6.0,2.5) {$\}\mathsf{Capa}$};
+    \draw[-latex,thick,blue](4.5,0.75)node[right]{$\mathsf{Celda}$}
+        to[out=150,in=45](0.,0.25);
+    %\draw[-latex,thick,blue](5,3.5)node[right]{$\mathsf{Anidado}$}
+    %    to[out=160,in=70] (2.5,3);
+
+    %drawing points on grid's conrners.
+    \fill[black,font=\footnotesize]
+        (-5,-4.3) node [above] {$(\text{y}_{max},\,\text{x}_{min})$}
+        %(-.3,-5.6) node [below] {$P_{2}$}
+        (5.5,-4) node [below] {$(\text{y}_{min},\,\text{x}_{max})$};	
+}
+
+\newcommand\DrawSistCoordenadas{
+   \shade [ball color=themecolor,fill opacity=0.5,earth] (0,0,0) circle [radius=2cm];
+
+  \fill[fill=black] (2,2,2) circle (2pt);
+
+	\draw[-latex, very thick] (0,0,0)--(0,3,0) node[anchor=east]{$x$};
+    \draw[-latex, very thick] (0,0,0)--(3,0,0)node[below]{$y$};
+    \draw[-latex, very thick] (0,0,0)--(0,0,5)node[below]{$z$};
+  \fill[fill=black] (2,2,2) circle (2pt) node[above,anchor=south west]{$x,y,z$};
+
+    \draw[dashed,black!50](2,0,2)--(0,0,0);
+    \draw[dashed,black!50](2,2,2)--(2,0,2);
+      \draw[-latex,very thick, red!70,] (.75,0,0) arc (0:45:.75)node[anchor=west,midway]{$\phi$};
+      \draw[-latex,very thick, red!70,] (0,0,0)--(2,2,2)node[anchor=west,midway,above]{$r$};
+      \tdplotsetmaincoords{70}{110}
+   \tdplotdrawarc{[-latex,red!70,very thick](0,0,0)}{1}{0}{45}{anchor=north}{$\theta$}
+  \fill[fill=black] (2,2,2) circle (2pt) node[below,anchor=north west,red!70]{$\phi,\theta,r$};
+}
+\newcommand\DrawCoordenadasVerticales{
+
+
+    %\draw [draw=gray, ->, dashed,thin] (-420, 0) -- (420, 0) node [at end, below] {$x$};
+    \draw [-latex,thick,orange] (-4.20,0) -- (-4.20,2) node [midway, left]  {$z$};
+    \draw [latex-,thick,orange] ( 4.20,0)  -- (4.20,2) node [midway, right] {$p$};
+
+     \draw [very thick,black!90]   plot [domain=-4.00:4.00, samples=100,name path=A] (\x, {abs(\x*100) >= 180 ? 0 : 1.5*(0.81 - (\x*100/200)^2)});
+    \fill [black!80,ground]
+      (-4.00,-.2)--(-4.00, 0)--(-1.80,0)
+      -- plot[domain=-1.80:1.80,variable=\x] ({\x}, {1.5*(0.81 - (\x*100/200)^2)})
+      -- (1.80,0)--(4.00, 0)--(4.00,-.2)
+      -- cycle;
+
+     \node[black!80] at (0,0.1) [align=center] {\grotesk Topografía};
+
+  \onslide<1>{}
+
+  \onslide<2>{ \foreach \i in {1,...,6}{
+   \draw [very thin, themecolor,dashed,yshift=\i*.3cm] 
+     plot [domain=-400:400, samples=100] (\x/100, {0});
+   }
+   \node at (-4.20,-0.5){\grotesk  Coordenada $z$};
+   \node at (-4.20,-1.5){\Large $z$};
+   \node at (4.20,-0.5){\grotesk Coordenada $p$};
+   \node at (4.20,-1.5){\Large $p$};
+   }
+
+  \onslide<3>{ \foreach \i in {.2,.4,...,1.}{
+   \draw [very thin, themecolor,dashed]  plot [domain=-4.00:4.00, samples=100] (\x, {abs(\x*100) >= 180 ? 2.*(\i*2. - 2.)/(-2.) : 2.*( (\i*2. - 2.)/(1.5*(0.81 - (\x*100/200)^2) - 2. ) )   });
+   }
+   \node at (-4.20,-0.5){ \grotesk  Coordenada $\sigma_z$};
+   \node at (-4.20,-1.5){\large $\sigma_z = \dfrac{z - z^{top}}{z_{surf}-z^{top}}$};
+   \node at (4.20,-0.5){\grotesk  Coordenada $\sigma_p$};
+   \node at (4.20,-1.5){\large $\sigma_z = \dfrac{p^{top}-p}{p^{top}-p_{surf}}$};
+
+   }
+   \onslide<4>{\node at (0,-1.5){{\large {\grotesk Coordenadas isentrópicas!!} \\ (= entropía)}};}
+
+}
+
+\newcommand\DrawStaggering{
+
+
+\begin{scope}[xshift=0cm]
+    \draw[very thick,blue!50] (-1,-1) rectangle (1,1);
+        \draw[fill=blue] ( 0, 0)   circle (0.05) node[anchor=north] {$(i,j)$};
+        \draw[fill=blue] (-1,-1) circle (0.05) node {$(u,v,\rho)$};
+        \draw[fill=blue](-1, 1) circle (0.05) node {$(u,v,\rho)$};
+        \draw[fill=blue] ( 1, 1) circle (0.05) node {$(u,v,\rho)$};
+        \draw[fill=blue] ( 1,-1) circle (0.05) node {$(u,v,\rho)$};
+\end{scope}
+
+\begin{scope}[xshift=3cm]
+    \draw[very thick,blue!50] (-1,-1) rectangle (1,1);
+        \draw[fill=blue] ( 0, 0) circle (0.05) node[anchor=north] {$(i,j)$} node[anchor=south]{$(u,v)$};
+        \draw[fill=blue] (-1,-1) circle (0.05) node {$\rho$};
+        \draw[fill=blue] (-1, 1) circle (0.05) node {$\rho$};
+        \draw[fill=blue] ( 1, 1) circle (0.05) node {$\rho$};
+        \draw[fill=blue] ( 1,-1) circle (0.05) node {$\rho$};
+\end{scope}
+
+\begin{scope}[xshift=6cm]
+    \draw[very thick,blue!50] (-1,-1) rectangle (1,1);
+        \draw[fill=blue] ( 0, 0)   circle (0.05) node[anchor=north] {$(i,j)$};
+        \draw[fill=blue] (-1,-1) circle (0.05) node {$\rho$};
+        \draw[fill=blue] (-1, 0) circle (0.05) node {$v$};
+        \draw[fill=blue] (-1, 1) circle (0.05) node {$\rho$};
+        \draw[fill=blue]( 0, 1) circle (0.05) node {$u$};
+        \draw[fill=blue] ( 1, 1) circle (0.05) node {$\rho$};
+        \draw[fill=blue]( 1, 0) circle (0.05) node {$v$};
+        \draw[fill=blue] ( 1,-1) circle (0.05) node {$\rho$};
+        \draw[fill=blue]( 0,-1) circle (0.05) node {$u$};
+\end{scope}
+
+\begin{scope}[xshift=9cm]
+    \draw[very thick,blue!50] (-1,-1) rectangle (1,1);
+        \draw[fill=blue]  ( 0, 0)   circle (0.05) node[anchor=north] {$(i,j)$};
+        \draw[fill=blue]  (-1,-1) circle (0.05) node {$\rho$};
+        \draw[fill=blue]  (-1, 0) circle (0.05) node {$u$};
+        \draw[fill=blue] (-1, 1) circle (0.05) node {$\rho$};
+        \draw[fill=blue] ( 0, 1) circle (0.05) node {$v$};
+        \draw[fill=blue]  ( 1, 1) circle (0.05) node {$\rho$};
+        \draw[fill=blue] ( 1, 0) circle (0.05) node {$u$};
+        \draw[fill=blue] ( 1,-1) circle (0.05) node {$\rho$};
+        \draw[fill=blue]  ( 0,-1) circle (0.05) node {$v$};
+\end{scope}
+
+\begin{scope}[xshift=12cm]
+    \draw[very thick,blue!50] (-1,-1) rectangle (1,1);
+        \draw[fill=blue] ( 0, 0)   circle (0.05) node[anchor=north] {$(i,j)$};
+        \draw[fill=blue] (-1,-1) circle (0.05) node {$(u,v)$};
+        \draw[fill=blue] (-1, 0) circle (0.05) node {$\rho$};
+        \draw[fill=blue] (-1, 1) circle (0.05) node {$(u,v)$};
+        \draw[fill=blue] ( 0, 1) circle (0.05) node {$\rho$};
+        \draw[fill=blue] ( 1, 1) circle (0.05) node {$(u,v)$};
+        \draw[fill=blue] ( 1, 0) circle (0.05) node {$\rho$};
+        \draw[fill=blue] ( 1,-1) circle (0.05) node {$(u,v)$};
+        \draw[fill=blue] ( 0,-1) circle (0.05) node {$\rho$};
+\end{scope}
+
+}
+
+
+
+
+\newcommand\DrawLagrangeParticulas{
+ \begin{tikzpicture}
+\begin{scope}[xshift=-4cm]
+
+\foreach \x in {0.,.5,...,2.0} {
+    \foreach \y in {0.,0.5,..., 2.0} {
+        %\draw[->,thick,blue!50]  (\x, \y)--++(0.15*\x,0.15*\x*\y-0.08*\x);
+        \fill[black!75] (\x, \y) circle[radius=1.5pt];
+    }
+}
+\end{scope}
+
+%\draw (0, 0) grid (2.5, 2.5);
+\foreach \x in {0.,.5,...,2.0} {
+    \foreach \y in {0.,0.5,..., 2.0} {
+        \draw[->,thick,blue!70]  (\x, \y)--++(0.1*\x+0.15,0.15*\x*\y*\y-0.15*\x);
+        \fill[black!75] (\x,\y) circle[radius=1.5pt];
+    }
+}
+\begin{scope}[xshift=4cm]
+
+\foreach \x in {0.,.5,...,2.0} {
+    \foreach \y in {0.,0.5,..., 2.0} {
+        \draw[->,thick,blue!20]  (\x, \y)--++(0.1*\x+0.15,0.15*\x*\y*\y-0.15*\x);
+        \fill[black!75] (\x, \y)++(0.1*\x+0.15,0.15*\x*\y*\y-0.15*\x) circle[radius=1.5pt];
+    }
+}
+\end{scope}
+
+\end{tikzpicture}
+}
+
+
+
+
+
+
+
+\usepackage{pgfplots}
+\pgfmathdeclarefunction{gauss}{2}{%
+  \pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
+}
+
+\pgfmathdeclarefunction{LogNormal}{2}{%
+  \pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((log(x-#1))^2)/(2*#2^2))}%
+}
+
+\pgfmathdeclarefunction{gaussPluma}{3}{%
+  \pgfmathparse{1/sqrt(2*pi*(2*#2*x/#1))*exp(-(1/(2*(2*#2*x/#1)^2))-x*#3/#1)}%
+}
+
+
+
+
+
+\newcommand{\EmisPict}{
+\begin{tikzpicture}[scale=1.2,inside/.style={draw opacity=.6,thick,dashed},
+                        %outside/.style={thick},
+                        every node/.style={font=\small}]
+        %lateral sides                
+        \draw[inside](0.5,0.5,0.5)--(0.5,-0.5,0.5)--(0.5,-0.5,-0.5)--(0.5,0.5,-0.5)--(0.5,0.5,0.5);
+        \draw[inside](-0.5,-0.5,-0.5)--(-0.5,0.5,-0.5)--(-0.5,0.5,0.5)--(-0.5,-0.5,0.5)--(-0.5,-0.5,-0.5);
+        %--
+        \draw[inside](-0.5,-0.5,-0.5)--(-0.5,0.5,-0.5)--(-0.5,0.5,0.5)--(-0.5,-0.5,0.5)--(-0.5,-0.5,-0.5);
+        \draw[inside,fill=themecolor!10](-0.5,-0.5,-0.5)--(0.5,-0.5,-0.5)--(0.5,-0.5,0.5)--(-0.5,-0.5,0.5)--(-0.5,-0.5,-0.5);
+        \draw[inside](-0.5,-0.5,-0.5)--(0.5,-0.5,-0.5)--(0.5,0.5,-0.5)--(-0.5,0.5,-0.5)--(-0.5,-0.5,-0.5);
+        \draw[inside](0.5,0.5,0.5)--(-0.5,0.5,0.5)--(-0.5,0.5,-0.5)--(0.5,0.5,-0.5)--(0.5,0.5,0.5);
+        \draw[inside](0.5,0.5,0.5)--(-0.5,0.5,0.5)--(-0.5,-0.5,0.5)--(0.5,-0.5,0.5)--(0.5,0.5,0.5);
+        \draw[dashed](-0.5,-0.5,-0.5)--(0.5,-0.5,-0.5)--(0.5,-0.5,0.5)--(-0.5,-0.5,0.5)--(-0.5,-0.5,-0.5);
+        \draw[dashed](-0.5,-0.5,-0.5)--(0.5,-0.5,-0.5)--(0.5,0.5,-0.5)--(-0.5,0.5,-0.5)--(-0.5,-0.5,-0.5);      
+        %% inside frame - this shouldn't be necessary...
+    %Emision:
+ 	\draw[-stealth,line width=0.5mm](0.0,-0.5,0)--(0,0.15,0) node[anchor=west,midway] {$E$};
+ 	 \axisDDD{0.5}{-2cm}{-0.5cm}
+\end{tikzpicture}
+}
+\newcommand{\AdvectPict}{
+\begin{tikzpicture}[scale=1.2,inside/.style={draw opacity=.5,thick,dashed},
+                        %outside/.style={thick},
+                        every node/.style={font=\small}]
+        %lateral sides                
+        \draw[inside,fill=red!10](0.5,0.5,0.5)--(0.5,-0.5,0.5)--(0.5,-0.5,-0.5)--(0.5,0.5,-0.5)--(0.5,0.5,0.5);
+        \draw[dashed,fill=blue!10](-0.5,-0.5,-0.5)--(-0.5,0.5,-0.5)--(-0.5,0.5,0.5)--(-0.5,-0.5,0.5)--(-0.5,-0.5,-0.5);
+        %--
+        \draw[inside](-0.5,-0.5,-0.5)--(-0.5,0.5,-0.5)--(-0.5,0.5,0.5)--(-0.5,-0.5,0.5)--(-0.5,-0.5,-0.5);
+        \draw[inside](-0.5,-0.5,-0.5)--(0.5,-0.5,-0.5)--(0.5,-0.5,0.5)--(-0.5,-0.5,0.5)--(-0.5,-0.5,-0.5);
+        \draw[inside](-0.5,-0.5,-0.5)--(0.5,-0.5,-0.5)--(0.5,0.5,-0.5)--(-0.5,0.5,-0.5)--(-0.5,-0.5,-0.5);
+        \draw[inside](0.5,0.5,0.5)--(-0.5,0.5,0.5)--(-0.5,0.5,-0.5)--(0.5,0.5,-0.5)--(0.5,0.5,0.5);
+        \draw[inside](0.5,0.5,0.5)--(-0.5,0.5,0.5)--(-0.5,-0.5,0.5)--(0.5,-0.5,0.5)--(0.5,0.5,0.5);
+        \draw[dashed](-0.5,-0.5,-0.5)--(0.5,-0.5,-0.5)--(0.5,-0.5,0.5)--(-0.5,-0.5,0.5)--(-0.5,-0.5,-0.5);
+        \draw[dashed](-0.5,-0.5,-0.5)--(0.5,-0.5,-0.5)--(0.5,0.5,-0.5)--(-0.5,0.5,-0.5)--(-0.5,-0.5,-0.5);      
+%VIENTO:
+ 	\draw[-stealth,line width=0.5mm](-1.5,0,0)--(-0.5,0,0) node[anchor=north,midway] {$Q_{1}C_{1}$};
+ 	\draw[-stealth,line width=0.5mm](0.5,0,0)--(1.5,0,0) node[anchor=north,midway] {$Q_{2}C_{2}$};
+    %\node[]at(-1.2,0,0){$C_{1}$};
+	%\node[]at(0,0,0){$C_{2}$};
+%\pause
+    \axisDDD{0.5}{-2cm}{-0.5cm}
+\end{tikzpicture}
+}
+
+\newcommand{\DiffPict}{
+\begin{tikzpicture}[scale=1.2,inside/.style={draw opacity=.5,thick,dashed},%outside/.style={thick},
+    every node/.style={font=\small}]
+        %lateral sides                
+        \draw[inside,fill=red!10](0.5,0.5,0.5)--(0.5,-0.5,0.5)--(0.5,-0.5,-0.5)--(0.5,0.5,-0.5)--(0.5,0.5,0.5);
+        \draw[dashed,fill=blue!10](-0.5,-0.5,-0.5)--(-0.5,0.5,-0.5)--(-0.5,0.5,0.5)--(-0.5,-0.5,0.5)--(-0.5,-0.5,-0.5);
+        %--
+        \draw[inside](-0.5,-0.5,-0.5)--(-0.5,0.5,-0.5)--(-0.5,0.5,0.5)--(-0.5,-0.5,0.5)--(-0.5,-0.5,-0.5);
+        \draw[inside](-0.5,-0.5,-0.5)--(0.5,-0.5,-0.5)--(0.5,-0.5,0.5)--(-0.5,-0.5,0.5)--(-0.5,-0.5,-0.5);
+        \draw[inside](-0.5,-0.5,-0.5)--(0.5,-0.5,-0.5)--(0.5,0.5,-0.5)--(-0.5,0.5,-0.5)--(-0.5,-0.5,-0.5);
+        \draw[inside](0.5,0.5,0.5)--(-0.5,0.5,0.5)--(-0.5,0.5,-0.5)--(0.5,0.5,-0.5)--(0.5,0.5,0.5);
+        \draw[inside](0.5,0.5,0.5)--(-0.5,0.5,0.5)--(-0.5,-0.5,0.5)--(0.5,-0.5,0.5)--(0.5,0.5,0.5);
+        \draw[dashed](-0.5,-0.5,-0.5)--(0.5,-0.5,-0.5)--(0.5,-0.5,0.5)--(-0.5,-0.5,0.5)--(-0.5,-0.5,-0.5);
+        \draw[dashed](-0.5,-0.5,-0.5)--(0.5,-0.5,-0.5)--(0.5,0.5,-0.5)--(-0.5,0.5,-0.5)--(-0.5,-0.5,-0.5);      
+    %VIENTO:
+ 	\draw[-stealth,line width=0.5mm](-1.5,0,0)--(-0.5,0,0) node[anchor=north,midway] {$J_{1}A$};
+ 	\draw[-stealth,line width=0.5mm](0.5,0,0)--(1.5,0,0) node[anchor=north,midway] {$J_{2}A$};
+ 	
+ 	\axisDDD{0.5}{-2cm}{-0.5cm}
+\end{tikzpicture}
+}
+
+\newcommand{\QuimPict}{
+\begin{tikzpicture}[scale=1.2,inside/.style={draw opacity=.5,thick,dashed},%outside/.style={thick},
+    every node/.style={font=\small}]
+        %lateral sides                
+        \draw[inside,fill=red!10](0.5,0.5,0.5)--(0.5,-0.5,0.5)--(0.5,-0.5,-0.5)--(0.5,0.5,-0.5)--(0.5,0.5,0.5);
+        \draw[dashed,fill=red!10](-0.5,-0.5,-0.5)--(-0.5,0.5,-0.5)--(-0.5,0.5,0.5)--(-0.5,-0.5,0.5)--(-0.5,-0.5,-0.5);
+        %--
+        \draw[inside,fill=red!10](-0.5,-0.5,-0.5)--(-0.5,0.5,-0.5)--(-0.5,0.5,0.5)--(-0.5,-0.5,0.5)--(-0.5,-0.5,-0.5);
+        \draw[inside,fill=red!10](-0.5,-0.5,-0.5)--(0.5,-0.5,-0.5)--(0.5,-0.5,0.5)--(-0.5,-0.5,0.5)--(-0.5,-0.5,-0.5);
+        \draw[inside,fill=red!10](-0.5,-0.5,-0.5)--(0.5,-0.5,-0.5)--(0.5,0.5,-0.5)--(-0.5,0.5,-0.5)--(-0.5,-0.5,-0.5);
+        \draw[inside,fill=red!10](0.5,0.5,0.5)--(-0.5,0.5,0.5)--(-0.5,0.5,-0.5)--(0.5,0.5,-0.5)--(0.5,0.5,0.5);
+        \draw[inside,fill=red!10](0.5,0.5,0.5)--(-0.5,0.5,0.5)--(-0.5,-0.5,0.5)--(0.5,-0.5,0.5)--(0.5,0.5,0.5);
+        \draw[dashed](-0.5,-0.5,-0.5)--(0.5,-0.5,-0.5)--(0.5,-0.5,0.5)--(-0.5,-0.5,0.5)--(-0.5,-0.5,-0.5);
+        \draw[dashed](-0.5,-0.5,-0.5)--(0.5,-0.5,-0.5)--(0.5,0.5,-0.5)--(-0.5,0.5,-0.5)--(-0.5,-0.5,-0.5);      
+        
+ 	    \axisDDD{0.5}{-2cm}{-0.5cm}
+\end{tikzpicture}
+}
+
+%%tikz pictures:
+%\newcommand{\EmisPict}{
+%\begin{tikzpicture}[scale=1.5,inside/.style={draw opacity=.6,thick,dashed},
+%                        %outside/.style={thick},
+%                        every node/.style={font=\small}]
+%        %lateral sides                
+%        \draw[inside](0.5,0.5,0.5)--(0.5,-0.5,0.5)--(0.5,-0.5,-0.5)--(0.5,0.5,-0.5)--(0.5,0.5,0.5);
+%        \draw[inside](-0.5,-0.5,-0.5)--(-0.5,0.5,-0.5)--(-0.5,0.5,0.5)--(-0.5,-0.5,0.5)--(-0.5,-0.5,-0.5);
+%        %--
+%        \draw[inside](-0.5,-0.5,-0.5)--(-0.5,0.5,-0.5)--(-0.5,0.5,0.5)--(-0.5,-0.5,0.5)--(-0.5,-0.5,-0.5);
+%        \draw[inside,fill=themecolor!10](-0.5,-0.5,-0.5)--(0.5,-0.5,-0.5)--(0.5,-0.5,0.5)--(-0.5,-0.5,0.5)--(-0.5,-0.5,-0.5);
+%        \draw[inside](-0.5,-0.5,-0.5)--(0.5,-0.5,-0.5)--(0.5,0.5,-0.5)--(-0.5,0.5,-0.5)--(-0.5,-0.5,-0.5);
+%        \draw[inside](0.5,0.5,0.5)--(-0.5,0.5,0.5)--(-0.5,0.5,-0.5)--(0.5,0.5,-0.5)--(0.5,0.5,0.5);
+%        \draw[inside](0.5,0.5,0.5)--(-0.5,0.5,0.5)--(-0.5,-0.5,0.5)--(0.5,-0.5,0.5)--(0.5,0.5,0.5);
+%        \draw[dashed](-0.5,-0.5,-0.5)--(0.5,-0.5,-0.5)--(0.5,-0.5,0.5)--(-0.5,-0.5,0.5)--(-0.5,-0.5,-0.5);
+%        \draw[dashed](-0.5,-0.5,-0.5)--(0.5,-0.5,-0.5)--(0.5,0.5,-0.5)--(-0.5,0.5,-0.5)--(-0.5,-0.5,-0.5);      
+%        %% inside frame - this shouldn't be necessary...
+%    %Emision:
+% 	\draw[-stealth,line width=0.5mm](0.0,-0.5,0)--(0,0.15,0) node[anchor=west,midway] {$E$};
+% 	 \axisDDD{0.5}{-2cm}{-0.5cm}
+%\end{tikzpicture}
+%}
+%
+%\newcommand{\AdvectPict}{
+%\begin{tikzpicture}[scale=1.5,inside/.style={draw opacity=.5,thick,dashed},
+%                        %outside/.style={thick},
+%                        every node/.style={font=\small}]
+%        %lateral sides                
+%        \draw[inside,fill=red!10](0.5,0.5,0.5)--(0.5,-0.5,0.5)--(0.5,-0.5,-0.5)--(0.5,0.5,-0.5)--(0.5,0.5,0.5);
+%        \draw[dashed,fill=blue!10](-0.5,-0.5,-0.5)--(-0.5,0.5,-0.5)--(-0.5,0.5,0.5)--(-0.5,-0.5,0.5)--(-0.5,-0.5,-0.5);
+%        %--
+%        \draw[inside](-0.5,-0.5,-0.5)--(-0.5,0.5,-0.5)--(-0.5,0.5,0.5)--(-0.5,-0.5,0.5)--(-0.5,-0.5,-0.5);
+%        \draw[inside](-0.5,-0.5,-0.5)--(0.5,-0.5,-0.5)--(0.5,-0.5,0.5)--(-0.5,-0.5,0.5)--(-0.5,-0.5,-0.5);
+%        \draw[inside](-0.5,-0.5,-0.5)--(0.5,-0.5,-0.5)--(0.5,0.5,-0.5)--(-0.5,0.5,-0.5)--(-0.5,-0.5,-0.5);
+%        \draw[inside](0.5,0.5,0.5)--(-0.5,0.5,0.5)--(-0.5,0.5,-0.5)--(0.5,0.5,-0.5)--(0.5,0.5,0.5);
+%        \draw[inside](0.5,0.5,0.5)--(-0.5,0.5,0.5)--(-0.5,-0.5,0.5)--(0.5,-0.5,0.5)--(0.5,0.5,0.5);
+%        \draw[dashed](-0.5,-0.5,-0.5)--(0.5,-0.5,-0.5)--(0.5,-0.5,0.5)--(-0.5,-0.5,0.5)--(-0.5,-0.5,-0.5);
+%        \draw[dashed](-0.5,-0.5,-0.5)--(0.5,-0.5,-0.5)--(0.5,0.5,-0.5)--(-0.5,0.5,-0.5)--(-0.5,-0.5,-0.5);      
+%        %% inside frame - this shouldn't be necessary...
+%
+%
+%%VIENTO:
+% 	\draw[-stealth,line width=0.5mm](-1.5,0,0)--(-0.5,0,0) node[anchor=north,midway] {$Q_{1}C_{1}$};
+% 	\draw[-stealth,line width=0.5mm](0.5,0,0)--(1.5,0,0) node[anchor=north,midway] {$Q_{2}C_{2}$};
+%    %\node[]at(-1.2,0,0){$N_{1}$};
+%	%\node[]at(0,0,0){$N_{2}$};
+%%\pause
+%%Caja entrada:
+%%\draw[fill=themecolor!10,opacity=0.1](-1,-0.5,-0.5)--(-1,-0.5,0.5)--(-1,0.5,0.5)--(-1,0.5,-0.50)--(-1,-0.5,-0.5);
+%%\draw[fill=themecolor!10,opacity=0.1](-1,0.5,-0.5)--(-0.5,0.5,-0.5)--(-0.5,0.5,0.5)--(-1,0.5,0.50)--(-1,0.5,-0.5);
+%%\draw[fill=themecolor!10,opacity=0.1](-1,-0.5,0.5)--(-0.5,-0.5,0.5)--(-0.5,0.5,0.5)--(-1,0.5,0.50)--(-1,-0.5,0.5);
+%%\pause
+%%Caja Salida
+%%\draw[fill=themecolor!40,opacity=0.1](0.5,0.5,-0.5)--(1,0.5,-0.5)--(1,0.5,0.5)--(0.5,0.5,0.50)--(0.5,0.5,-0.5);
+%%\draw[fill=themecolor!40,opacity=0.1](0.5,-0.5,0.5)--(1,-0.5,0.5)--(1,0.5,0.5)--(0.5,0.5,0.50)--(0.5,-0.5,0.5);
+%%\draw[fill=themecolor!40,opacity=0.1](1,-0.5,-0.5)--(1,-0.5,0.5)--(1,0.5,0.5)--(1,0.5,-0.50)--(1,-0.5,-0.5);
+%\end{tikzpicture}
+%}
+%
+%\newcommand{\DiffPict}{
+%\begin{tikzpicture}[scale=1.5,inside/.style={draw opacity=.5,thick,dashed},%outside/.style={thick},
+%    every node/.style={font=\small}]
+%        %lateral sides                
+%        \draw[inside,fill=red!10](0.5,0.5,0.5)--(0.5,-0.5,0.5)--(0.5,-0.5,-0.5)--(0.5,0.5,-0.5)--(0.5,0.5,0.5);
+%        \draw[dashed,fill=blue!10](-0.5,-0.5,-0.5)--(-0.5,0.5,-0.5)--(-0.5,0.5,0.5)--(-0.5,-0.5,0.5)--(-0.5,-0.5,-0.5);
+%        %--
+%        \draw[inside](-0.5,-0.5,-0.5)--(-0.5,0.5,-0.5)--(-0.5,0.5,0.5)--(-0.5,-0.5,0.5)--(-0.5,-0.5,-0.5);
+%        \draw[inside](-0.5,-0.5,-0.5)--(0.5,-0.5,-0.5)--(0.5,-0.5,0.5)--(-0.5,-0.5,0.5)--(-0.5,-0.5,-0.5);
+%        \draw[inside](-0.5,-0.5,-0.5)--(0.5,-0.5,-0.5)--(0.5,0.5,-0.5)--(-0.5,0.5,-0.5)--(-0.5,-0.5,-0.5);
+%        \draw[inside](0.5,0.5,0.5)--(-0.5,0.5,0.5)--(-0.5,0.5,-0.5)--(0.5,0.5,-0.5)--(0.5,0.5,0.5);
+%        \draw[inside](0.5,0.5,0.5)--(-0.5,0.5,0.5)--(-0.5,-0.5,0.5)--(0.5,-0.5,0.5)--(0.5,0.5,0.5);
+%        \draw[dashed](-0.5,-0.5,-0.5)--(0.5,-0.5,-0.5)--(0.5,-0.5,0.5)--(-0.5,-0.5,0.5)--(-0.5,-0.5,-0.5);
+%        \draw[dashed](-0.5,-0.5,-0.5)--(0.5,-0.5,-0.5)--(0.5,0.5,-0.5)--(-0.5,0.5,-0.5)--(-0.5,-0.5,-0.5);      
+%    %VIENTO:
+% 	\draw[-stealth,line width=0.5mm](-1.5,0,0)--(-0.5,0,0) node[anchor=north,midway] {$J_{1}A$};
+% 	\draw[-stealth,line width=0.5mm](0.5,0,0)--(1.5,0,0) node[anchor=north,midway] {$J_{2}A$};
+%\end{tikzpicture}
+%}
+%
+%\newcommand{\QuimPict}{
+%\begin{tikzpicture}[scale=1.5,inside/.style={draw opacity=.5,thick,dashed},%outside/.style={thick},
+%    every node/.style={font=\small}]
+%        %lateral sides                
+%        \draw[inside,fill=red!10](0.5,0.5,0.5)--(0.5,-0.5,0.5)--(0.5,-0.5,-0.5)--(0.5,0.5,-0.5)--(0.5,0.5,0.5);
+%        \draw[dashed,fill=red!10](-0.5,-0.5,-0.5)--(-0.5,0.5,-0.5)--(-0.5,0.5,0.5)--(-0.5,-0.5,0.5)--(-0.5,-0.5,-0.5);
+%        %--
+%        \draw[inside,fill=red!10](-0.5,-0.5,-0.5)--(-0.5,0.5,-0.5)--(-0.5,0.5,0.5)--(-0.5,-0.5,0.5)--(-0.5,-0.5,-0.5);
+%        \draw[inside,fill=red!10](-0.5,-0.5,-0.5)--(0.5,-0.5,-0.5)--(0.5,-0.5,0.5)--(-0.5,-0.5,0.5)--(-0.5,-0.5,-0.5);
+%        \draw[inside,fill=red!10](-0.5,-0.5,-0.5)--(0.5,-0.5,-0.5)--(0.5,0.5,-0.5)--(-0.5,0.5,-0.5)--(-0.5,-0.5,-0.5);
+%        \draw[inside,fill=red!10](0.5,0.5,0.5)--(-0.5,0.5,0.5)--(-0.5,0.5,-0.5)--(0.5,0.5,-0.5)--(0.5,0.5,0.5);
+%        \draw[inside,fill=red!10](0.5,0.5,0.5)--(-0.5,0.5,0.5)--(-0.5,-0.5,0.5)--(0.5,-0.5,0.5)--(0.5,0.5,0.5);
+%        \draw[dashed](-0.5,-0.5,-0.5)--(0.5,-0.5,-0.5)--(0.5,-0.5,0.5)--(-0.5,-0.5,0.5)--(-0.5,-0.5,-0.5);
+%        \draw[dashed](-0.5,-0.5,-0.5)--(0.5,-0.5,-0.5)--(0.5,0.5,-0.5)--(-0.5,0.5,-0.5)--(-0.5,-0.5,-0.5);      
+%\end{tikzpicture}
+%}
+%
+\newcommand{\CicloDiurnoPBL}[0]{
+
+
+       \fill[blue!5] (0,2.0) rectangle(24,2.9);
+        \fill[blue!20,shading = axis, left color=blue!80, right color=blue!10,shading angle= 70] (0,0) rectangle(12,2);
+        \fill[blue!20,shading = axis, left color=blue!80, right color=blue!10,shading angle=-70] (12,0) rectangle(24,2);
+        \fill[white] (0,-0.2) rectangle(24,0);
+        \draw[-latex,thick,black!80] (0,0)--(0,3)node[anchor=east]{$z$ (km) };
+    
+        \piso{0}{24}{0}
+        \foreach \i in {0,6,...,24} \draw[] (\i,-0.2) --(\i,-0.4)  node[anchor=north]{\i};
+        \foreach \i in {0,1,2}    \draw[] (-0.0,\i) --(-0.3,\i)  node[anchor=east ]{\i};
+        %stable layer
+        \draw[dotted, thick] (0,1)--(8,1);
+        \draw[dotted, thick] (18,0) to [out=40,in=180,looseness=0.9] (24,1);
+         %capa de inversión
+         \draw[thin,black!80,fill=blue!80,decorate] (0,2.1) to[out=3,in=182] (10,2.1) -- (10,1.7) to[in=3,out=182] (0,1.7);
+         \draw[thin,black!80,fill=blue!80] (6,0) to [out=15,in=180] (10,2.1)to[out=4,in=182] (24,2.1) -- (24,1.7)to[in=4,out=182](10.2,1.7) to [in=05,out=180] (6.1,0) ;
+        
+        %surface layer
+        \draw[dashed, orange!80] (0,0.2) -- (24,0.2) node[anchor=west]{CS};
+        
+        %separacion dia noche
+        \draw[thick,dashed](18,0)--(18,2);
+        \draw[thick,dashed]( 6,0)--( 6,2);
+       
+        %labels
+        \node at (12,1){\Large CM};
+        \node at (21,0.5){\Large CE};
+        \node at (23,1.3){\Large CR};
+        
+        \node at (3,0.5){\Large CE};
+        \node at (3,1.3){\Large CR};
+        
+        \node[white,rotate=-2] at ( 3,2.0){\small Inversión};
+        \node[white] at (21,1.90){\small Inversión};
+        \node[white,rotate=3] at (12,1.97){\small Capa de arrastre};
+    
+        \node at (12,2.5){\large Atmosfera libre};
+        
+        \draw[latex-] (6,2.1)-- (6,2.5) node[anchor=south]{\small (Amanece)};
+        \draw[latex-](18,2.1)--(18,2.5) node[anchor=south]{\small (Anochece)};
+}
+
+
+
+
+
+\newcommand\ejesXZ[3]{
+    \draw[thick,-latex] (#1,#2) --++ (#3,0) node[right] {x};
+    \draw[thick,-latex] (#1,#2) --++ (0,#3) node[above] {z};
+}
+
+\newcommand\piso[3]{
+ %piso
+ \fill[ground] (#1,{#3-0.2})rectangle(#2,#3);
+ \draw [very thick] (#1,#3)--(#2,#3);
+v}
+
+\newcommand\chimenea[4]{ %x y  W H
+ %pluma real 
+ %\node(chim1)[fill=black!60,minimum height=1.25cm] at (-3,0.6){}; 
+ \draw[fill=black!60](#1,#2) rectangle ++(#3,#4);
+   
+}
+
+\newcommand\pluma[3]{
+ \fill[red!20,opacity=0.5,yshift=0.5cm] (chim1.north) -- (4,2) -- (4,-1) -- (chim1.north);
+}
+% \draw[| latex-latex] (-3.2, 1.2)--(-3.2,0) node[midway, anchor=east]{$H$};
+    
+
+
+\pgfdeclarepatternformonly{my crosshatch dots}{\pgfqpoint{-1pt}{-1pt}}{\pgfqpoint{5pt}{5pt}}{\pgfqpoint{6pt}{6pt}}%
+{
+    \pgfpathcircle{\pgfqpoint{3pt}{3pt}}{.9pt}
+    \pgfpathcircle{\pgfqpoint{3pt}{3pt}}{.9pt}
+    \pgfusepath{fill}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

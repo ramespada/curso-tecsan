@@ -1,0 +1,149 @@
+\RequirePackage{ifthen}
+%COLORS:
+\RequirePackage{xcolor}
+\definecolor{blacky}{HTML}{403e3d}%303030}
+\definecolor{lgray}{HTML}{505050}
+%\definecolor{themecolor}{HTML}{55A5FF}%{3366ff}%{303030}%{204080}
+\definecolor{themecolor}{HTML}{00af84}%{3366ff}%{303030}%{204080}
+\definecolor{blood}{HTML}{FB100D}
+\definecolor{tree}{HTML}{007049}%{00c30b}%
+\definecolor{sea}{HTML}{0077bf}
+\definecolor{textcolor}{HTML}{202020}%{204080}
+
+\colorlet{blue}{sea}%RGB: 43, 101, 236 - HSL: 0.62, 0.84, 0.55
+\colorlet{red}{blood}%RGB: 43, 101, 236 - HSL: 0.62, 0.84, 0.55
+\colorlet{green}{tree}%RGB: 43, 101, 236 - HSL: 0.62, 0.84, 0.55
+
+%FONTS:
+\RequirePackage{fontspec}
+%\newfontfamily{\grotesk}{grotesk}[Extension = .otf, UprightFont = *-Regular]
+%\newfontfamily{\grotesk}{Grotesk}[Extension = .ttf, UprightFont = *-Bold]
+
+\RequirePackage{svg}
+
+\usepackage[T1]{fontenc}
+
+\mode<presentation>{ 
+
+    %Agregar logo fauba al Background
+    \setbeamertemplate{background}{
+        \begin{tikzpicture}[remember picture,overlay]
+            %\node[opacity=.7,xshift=-0.9cm,yshift=-0.85cm] at (current page.north east) {\includesvg[width=0.1\textwidth]{logo/aluar-logo.svg}};
+            \node[opacity=.8,xshift=-2.0cm,yshift=-0.5cm] at (current page.north east) {\includegraphics[width=0.25\textwidth]{logo/tecsan.png}};
+            %\node[opacity=0.3                             ] at (current page.center) {\includegraphics[width=0.08\textwidth]{logo_fauba.png}};
+        \end{tikzpicture}
+    }
+
+    %THEMES:
+	\usetheme{default}      % or try Darmstadt, Madrid, Warsaw, ...
+  	\usecolortheme{default} % or try albatross, beaver, crane, ...
+  	\usefonttheme{default}  % or try serif, structurebold, ...
+
+    %FONTS:
+	\setbeamerfont{title}{family=\huge}%
+	\setbeamerfont{subtitle}{family=\huge}%\grotesk\selectfont}%
+	
+	\setbeamerfont{caption}{family=\footnotesize} %achicar un toque las captions
+
+	
+	 
+	
+	\setbeamerfont{frametitle}{family=\LARGE}%\bf\grotesk}
+	\setbeamerfont{framesubtitle}{family=\Large}%\grotesk}
+	\setbeamerfont{block title}{family=\large}%\grotesk}
+
+    %COLORS:
+    \setbeamercolor{title}{fg=lgray}
+    \setbeamercolor{subtitle}{fg=themecolor}
+   	\setbeamercolor{frametitle}{fg=themecolor}
+    \setbeamercolor{framesubtitle}{fg=lgray}%
+	\setbeamercolor{normal text}{fg=textcolor}
+    \setbeamercolor*{structure}{fg=themecolor} %color de items, seccion en el ToC, color de enumerate
+    \setbeamercolor*{block title}{fg=themecolor,bg=themecolor!10}
+    \setbeamercolor*{block title example}{bg=green!10,fg=black!70}
+    \setbeamercolor*{block title alerted}{bg=red!10,fg=black!70}
+    \setbeamercolor*{block body example}{bg=green!20,fg=black!70}
+    \setbeamercolor*{block body alerted}{bg=red!20,fg=black}
+    
+    
+%    %TEMPLATES
+%    \setbeamertemplate{navigation symbols}{}
+	 \setbeamertemplate{caption}[numbered]
+%    \setbeamertemplate{frametitle}[default][center]
+%    \setbeamertemplate{framesubtitle}[default]%[center]
+     \setbeamertemplate{footline}[frame number]% Numero en el footer.  
+%    \setbeamertemplate{headline}{}%\leavevmode
+%    \setbeamertemplate{blocks}[rounded,shadow=true]{
+%    \tiny\hfill \insertsectionhead \hspace{3em}}
+%    \setbeamertemplate{section in toc}{\bf \inserttocsectionnumber.~\color{lgray}\inserttocsection}
+} 
+
+%
+%\AtBeginSection[]{
+%  \begin{frame}
+%  \vfill
+%  \centering
+%  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+%    \usebeamerfont{title}{\color{blacky}\fontsize{100}{100}\selectfont\thesection}\\ \color{blacky}\insertsectionhead\par%
+%  \end{beamercolorbox}
+%  \vfill
+%  \end{frame}
+%}
+%Para slides separa secciones
+\AtBeginSection[]{
+  \begin{frame}[c]
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \end{frame}
+}
+
+
+%\usebackgroundtemplate{\includegraphics[width=10mm]{bg}}
+
+%TIKZ:
+\RequirePackage{tikz}
+\RequirePackage{tikz-3dplot}
+\input{tikz.tex}
+
+\RequirePackage{pgfplots}
+\pgfplotsset{compat=1.15} 
+
+\usepgfplotslibrary{groupplots,polar,units,fillbetween,colormaps}
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+%MATH:
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath, amsbsy,bm}%,amsfonts}
+%\RequirePackage{mathpazo} 
+\usepackage{mathpple}%{mathptmx}%
+
+%OTROS:
+\RequirePackage[version=3]{mhchem} %Chem
+
+\RequirePackage[export]{adjustbox} % para valign de las figures.
+\RequirePackage{multicol}
+\usepackage{interval}
+\usepackage{dirtree}
+
+%Comandos personales:
+\let\oldvec=\vec
+\renewcommand{\vec}[1]{\bm{\underline{#1}}}
+\newcommand{\tens}[1]{\bm{\underline{\underline{#1}}}}
+
+\newcommand\Dt{\Delta t}
+\newcommand\pt{\partial t}
+
+\renewcommand{\alert}[1]{{\color{themecolor}#1}}
+\newcommand\good[1]{{\color{green}#1}}
+\newcommand\bad[1]{ {\color{red}#1}}
+
+\newcommand{\file}[1]{\texttt{\color{purple}#1}}
+\newcommand{\variable}[1]{{\color{green}\ttfamily\fontseries{b}\selectfont#1}}
+
+
+
+
+

@@ -25,6 +25,7 @@ collections:
 
 # Excludes
 exclude:
+  - ppts/
   - README.md
   - Gemfile
   - Gemfile.lock

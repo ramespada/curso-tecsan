@@ -1,6 +1,5 @@
 ---
-nav_exclude: true
-nav_order: 20
+ready: false
 ---
 
 # KEYWORDS: Aermod

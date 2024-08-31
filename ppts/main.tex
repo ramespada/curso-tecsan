@@ -1,0 +1,39 @@
+%\documentclass[aspectratio=169]{beamer}    
+\documentclass[handout, aspectratio=169]{beamer}
+\usepackage{style}
+\usepackage[makeroom]{cancel}
+\usepackage[spanish]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{svg}
+\setcounter{section}{-1}
+\title{Modelado de la Calidad del Aire}
+
+\author{Ramiro A. Espada \\ \texttt{espada@agro.uba.ar}}
+\institute{Consultora Oeste}
+
+\begin{document}
+\setbeamercolor{background canvas}{bg=green!5}
+
+	%--------------------------------------------
+	%% Ecuacion de transporte
+	%\input{teoricas/00ECTRANS} %Ecuacion de transporte (en principio no se va a dar)
+	
+	%%% Introducción a los modelos gaussianos:
+	\input{teoricas/01GAUSSIANOS}   %Introduccion a los modelos de calidad del aire
+	\input{teoricas/01_GAUSS_MODIF}
+	
+	%% Meteorología}
+	%\input{teoricas/02METEO}
+	%\input{teoricas/02MET_APTI}
+	
+	%% Detallado: AERMET y AERMOD, fundamentos.
+	%\input{teoricas/05AERMOD}
+	%% Temas avanzados: (interaccion con terreno, coastal fumig, )
+	%\input{teoricas/03INTERAC}
+	%\input{teoricas/03TERRENOURBANO}
+
+\end{document}
