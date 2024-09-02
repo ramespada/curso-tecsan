@@ -6,6 +6,20 @@ phony: true
 excerpt: '' # work around a bug
 ---
 
+
+<h2> Unidades teóricas: </h2>
+
+<ul>
+<li><a href="./ppts/pdfs/01-ectrans.pdf"   >Ecuación de transporte                  </a></li> <br>
+<li><a href="./ppts/pdfs/02-meteo.pdf"     >Nociones de meteorología de capa límite </a></li> <br> 
+<li><a href="./ppts/pdfs/03-gaussianos.pdf">Modelos Gaussianos                      </a></li> <br> 
+<li><a href="./ppts/pdfs/04-aermod.pdf"    >Fundamentos de Aermod                   </a></li> <br>
+<ul>
+<br>
+
+
+<h2> Unidades prácticas: </h2>
+
 <ul>
   {% assign lectures = site['clases'] | sort: 'date' %}
   {% for lecture in lectures %}
@@ -27,4 +41,6 @@ excerpt: '' # work around a bug
     {% endif %}
   {% endfor %}
 </ul>
+
+
 

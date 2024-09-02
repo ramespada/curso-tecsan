@@ -20,18 +20,18 @@
 
 	%--------------------------------------------
 	%% Ecuacion de transporte
-	%\input{teoricas/00ECTRANS} %Ecuacion de transporte (en principio no se va a dar)
+	%%\input{teoricas/00ECTRANS} %Ecuacion de transporte (en principio no se va a dar)
 	
 	%%% Introducción a los modelos gaussianos:
-	\input{teoricas/01GAUSSIANOS}   %Introduccion a los modelos de calidad del aire
-	\input{teoricas/01_GAUSS_MODIF}
+	%\input{teoricas/01GAUSSIANOS}   %Introduccion a los modelos de calidad del aire
+	%\input{teoricas/01_GAUSS_MODIF}
 	
 	%% Meteorología}
 	%\input{teoricas/02METEO}
 	%\input{teoricas/02MET_APTI}
 	
 	%% Detallado: AERMET y AERMOD, fundamentos.
-	%\input{teoricas/05AERMOD}
+	\input{teoricas/05AERMOD}
 	%% Temas avanzados: (interaccion con terreno, coastal fumig, )
 	%\input{teoricas/03INTERAC}
 	%\input{teoricas/03TERRENOURBANO}
