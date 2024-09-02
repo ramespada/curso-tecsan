@@ -2,7 +2,7 @@
 layout: lecture
 title: Aermap
 descripcion: Preprocesador de terreno.
-date: 2024-09-02
+date: 2024-09-03
 ready: true
 ---
 

@@ -15,15 +15,17 @@ El objetivo del curso es exponer las bases para la implementación de modelos de
 
 # Cronograma
 
-|  Día/Mes  | Turno/Hora  | Unidad                             |
-|:----------|:------------|:-----------------------------------|
-|  02/09    | Mañana      | Introducción y Meteorología de CL. |
-|           | Tarde       | Preparación de corrida.            |
-|  03/09    | Mañana      | Fundamentos de AERMOD              |
-|           | Tarde       | Ejecucción de AERMOD               |
-|  04/09    | Mañana      | Emisiones: estimación y reducción. |
-|           | Tarde       | Post-procesamiento                 |
+|Día/Mes    | Turno/Hora  | Unidad                               |
+|:----------|:------------|:-------------------------------------|
+|  02/09    | Mañana      | Introducción y Meteorología de CL.   |
+|           | Tarde       | Preparación de corrida.              |
+|  03/09    | Mañana      | Fundamentos de AERMOD                |
+|           | Tarde       | Ejecucción de AERMOD                 |
+|  04/09    | Mañana      | Emisiones: estimación y reducción.   |
+|           | Tarde       | Post-procesamiento                   |
 
+
+<br>
 
 Acá subiremos algo de [material](./material/) para profundizar los temas tratados.
 

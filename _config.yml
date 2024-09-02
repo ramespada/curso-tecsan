@@ -25,7 +25,7 @@ collections:
 
 # Excludes
 exclude:
-  - _clases/ppts/
+  - _clases/ppts/tex
   - README.md
   - Gemfile
   - Gemfile.lock

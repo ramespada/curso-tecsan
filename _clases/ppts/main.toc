@@ -1,4 +1,0 @@
-\babel@toc {nil}{}\relax 
-\beamer@sectionintoc {0}{Interfaz meteorológica}{4}{0}{1}
-\beamer@sectionintoc {1}{Cálculo de concentraciones}{7}{0}{2}
-\beamer@sectionintoc {2}{Estimación de coeficientes de dispersión}{15}{0}{3}

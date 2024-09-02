@@ -1,7 +1,0 @@
-\babel@toc {nil}{}\relax 
-\beamer@sectionintoc {0}{Introducción}{2}{0}{1}
-\beamer@sectionintoc {1}{Emisiones}{7}{0}{2}
-\beamer@sectionintoc {2}{Reacciones químicas}{9}{0}{3}
-\beamer@sectionintoc {3}{Advección}{11}{0}{4}
-\beamer@sectionintoc {4}{Mezclado turbulento}{14}{0}{5}
-\beamer@sectionintoc {5}{Ecuación de transporte}{19}{0}{6}
