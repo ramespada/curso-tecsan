@@ -1,0 +1,26 @@
+****************************************************
+** AERMET - STAGE 3 Input produced by:
+** AERMET View Ver. 9.4.0
+** Lakes Enviornmental Software Inc.
+****************************************************
+**
+** Stage 3 - Estimación de parametros de la capa límite y creación de .SFC y .PFL
+JOB
+MESSAGES STG3.MSG
+REPORT   STG3.RPT
+METPREP
+DATA       $PROYECTO.MRG
+MODEL      AERMOD
+LOCATION   $id_sfc 00.000S 000.000W  $tz
+XDATES     $byr/$bmon/$bday TO $eyr/$emon/$eday
+OUTPUT     $PROYECTO.SFC
+PROFILE    $PROYECTO.PFL
+
+** Métodos para precesamiento de datos:
+METHOD   WIND_DIR  RANDOM
+METHOD   REFLEVEL  SUBNWS
+NWS_HGT  WIND      10.0
+METHOD   UASELECT SUNRISE
+UAWINDOW -12 12
+AERSURF $AERSURFACE_FILE
+

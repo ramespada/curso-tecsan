@@ -1,0 +1,17 @@
+********************************************************
+** AERMET - STAGE 2 Input Produced by:
+** AERMET View Ver. 9.4.0
+** Lakes Environmental Software Inc.
+** Date: 2021/01/28
+** File: C:\Users\ry08629\OneDrive - YPF\Escritorio\Modelado 2020\EneFeb21\meteo\2014\AEP-14.IN2
+********************************************************
+JOB
+   REPORT      STG2.RPT
+   MESSAGES    STG2.MSG
+UPPERAIR
+   QAOUT      QA_UA.OUT
+SURFACE
+   QAOUT      QA_SFC.OUT
+MERGE
+   OUTPUT      $PROYECTO.MRG
+   XDATES     $byr/$bmon/$bday TO $eyr/$emon/$eday

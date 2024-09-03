@@ -1,0 +1,20 @@
+** Stage 1: Lectura y procesamiento de datos de entrada.
+JOB
+MESSAGES STG1.MSG
+REPORT   STG1.RPT
+
+SURFACE
+DATA       $ISH ISHD
+EXTRACT    EXTRACT_SFC.DSK
+QAOUT      QA_SFC.OUT
+
+XDATES     $byr/$bmon/$bday TO $eyr/$emon/$eday
+LOCATION   $id_sfc 00.000S  000.000W  $tz  +0025
+
+UPPERAIR
+DATA       DUMMY.FSL FSL
+EXTRACT    EXTRACT_UP.DSK
+QAOUT      QA_UA.OUT
+
+XDATES     $byr/$bmon/$bday TO $eyr/$emon/$eday
+LOCATION   $id_up  00.000S  000.000W  $tz  +0025
