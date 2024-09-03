@@ -33,6 +33,5 @@ Acá subiremos algo de [material](./material/) para profundizar los temas tratad
 
 <div class="small center">
    <p><a href="https://github.com/ramespada/curso-tecsan">Repositorio</a>.</p>
-   <p>Ramiro A. Espada</p>
    <p>Consultora Oeste</p>
 </div>

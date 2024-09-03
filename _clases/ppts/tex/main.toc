@@ -1,0 +1,5 @@
+\babel@toc {nil}{}\relax 
+\beamer@sectionintoc {0}{Solución Analítica a Ecuación de Transporte}{4}{0}{1}
+\beamer@sectionintoc {1}{Puff Gaussiano}{9}{0}{2}
+\beamer@sectionintoc {2}{Pluma Gaussiana}{13}{0}{3}
+\beamer@sectionintoc {3}{Modificacciones a modelo Gaussiano}{19}{0}{4}

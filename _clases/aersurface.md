@@ -6,8 +6,6 @@ date: 2024-09-03
 ready: true
 ---
 
-# Aermod: AERSURFACE
-
 > Tutorial para el preprocesamiento de datos de superficie aermod (**AERSURFACE**)
 
 
@@ -15,8 +13,8 @@ El **AERSURFACE** es un preprocesador que nos permite estimar parámetros de sup
 Este programa relaciona una clasificación de cobertura del suelo (pastizal, urbano, agua), a una distancia de la estación meteorológica de superficie, para inferir los siguientes parámetros:
 
 1. albedo &alpha;
-2. proporción (ratio) de bowen $B_{0}$
-3. longitud de rugosidad de superficie $z_{0}$ 
+2. proporción (ratio) de bowen B0
+3. longitud de rugosidad de superficie z0 
 
 Este programa necesita datos que requieren un formato de clasificación particular del servicio geológico de estados unidos ([NLCD](https://www.mrlc.gov/)) y que en consecuencia no esta disponible en nuestro país. 
 
@@ -46,30 +44,30 @@ Esta clasificación de cobertura del suelo el USGS define las siguientes clases:
 
 Así se visualiza la clasificación de cobertura para un aeropuerto de estados unidos.
 
-![](/mca-fauba/tut/imgs/aersurf_pizza.png)
+![](/tut/imgs/aersurf_pizza.png)
 
-![](/mca-fauba/tut/imgs/aersurf_pizza_nlcd.png)
+![](/tut/imgs/aersurf_pizza_nlcd.png)
 
 Para determinar la clase dominante y sus parámetros asociados se debe analizar la siguiente información.
 
 1. albedo &alpha;:
     - Media *aritmética* de región de 10 km x 10 km centrada en la estación meteorológica. 
 
-2. proporción (ratio) de bowen $B_{0}$
+2. proporción (ratio) de bowen B0
    - Media *geométrica* de región de 10 km x 10 km centrada en la estación meteorológica.
  
-3. longitud de rugosidad de superficie $z_{0}$
-   - En un radio de 1km a la estación meteorológica, se deben analizar 12 direcciones del viento o secciones de 30°. A cada sección se asigna como $z_{0}$ la media geométrica del valor de rugosidad ponderado de forma inversa a la distancia a la estación. 
+3. longitud de rugosidad de superficie z0
+   - En un radio de 1km a la estación meteorológica, se deben analizar 12 direcciones del viento o secciones de 30°. A cada sección se asigna como z0 la media geométrica del valor de rugosidad ponderado de forma inversa a la distancia a la estación. 
 
 
 
 
 Entonces se podrían visualizar a continuación, las dos áreas analizadas.   
-![aersurface_radio](/mca-fauba/tut/imgs/aersurface_radio.png)
+![aersurface_radio](/tut/imgs/aersurface_radio.png)
 
 Cada sección va a representar una cobertura distinta, con parámetros de albedo, bowen y rugosidad distintas. En el anexo A de la guía de usuario de *AERSURFACE* se listan las tablas completas, a los fines de este tutorial, vamos a extraer y simplificar la información de algunas clases.
 
-|Clase|Descripción|$B_{0}$ verano|$B_{0}$ otoño|$B_{0}$ invierno|$B_{0}$ primavera|
+|Clase|Descripción|B0 verano|B0 otoño|B0 invierno|B0 primavera|
 |-|-|-|-|-|-|
 |21 |Low Intensity Residential |0.8 |1| 1 | 0.8|
 |22 |High Intensity Residential| 1.5| 1.5 1.5|1.5|
@@ -84,7 +82,7 @@ Cada sección va a representar una cobertura distinta, con parámetros de albedo
 |85| Urban/Recreational Grasses |0.15 |0.15 |0.18 | 0.15|
 
 
-|Clase|Descripción|$z_{0}$ verano|$z_{0}$ otoño|$z_{0}$ invierno|$z_{0}$ primavera|
+|Clase|Descripción|z0 verano|z0 otoño|z0 invierno|z0 primavera|
 |-|-|-|-|-|-|
 |21 |Low Intensity Residential |0.54 |0.54| 0.5 | 0.52|
 |22 |High Intensity Residential| 1| 1| 1|1|
@@ -92,7 +90,7 @@ Cada sección va a representar una cobertura distinta, con parámetros de albedo
 |85| Urban/Recreational Grasses |0.02 |0.015 |0.01 | 0.015|
 
 Por ejemplo, para el caso de EZEIZA AERO, las áreas a analizar serían las siguientes:
-![](/mca-fauba/tut/imgs/saez_al_bow_zo.png)
+![](/tut/imgs/saez_al_bow_zo.png)
 
 En cuanto a cobertura, la mejor fuente de información disponible hasta el momento es la [clasificación de la agencia espacial europea](https://land.copernicus.eu/global/content/annual-100m-global-land-cover-maps-available) con resolución de 100mx100m y uso de clases de la FAO en vez del servicio geológico de estados unidos.
 
@@ -138,11 +136,11 @@ Buscamos para cada "estación" los valores de superficie para la case 21.
 |-|-|-|-|-|-|
 |21 |Low Intensity Residential |0.16 |0.16| 0.18 | 0.16|
 
-|Clase|Descripción|$B_{0}$ verano|$B_{0}$ otoño|$B_{0}$ invierno|$B_{0}$ primavera|
+|Clase|Descripción|B0 verano|B0 otoño|B0 invierno|B0 primavera|
 |-|-|-|-|-|-|
 |21 |Low Intensity Residential |0.8 |1| 1 | 0.8|
 
-|Clase|Descripción|$z_{0}$ verano|$z_{0}$ otoño|$z_{0}$ invierno|$z_{0}$ primavera|
+|Clase|Descripción|z0 verano|z0 otoño|z0 invierno|z0 primavera|
 |-|-|-|-|-|-|
 |21 |Low Intensity Residential |0.54 |0.54| 0.5 | 0.52|
 
@@ -175,7 +173,7 @@ El contenido final de  ``AERSURFACE.OUT`` debería ser el siguiente:
 
 Podría darse un caso donde existan diferencias en las propiedades de superficie del radio de 1km a la fuente de información de velocidad del viento. 
 
-![](/mca-fauba/tut/imgs/ejemplo_dos_sectores.png)
+![](/tut/imgs/ejemplo_dos_sectores.png)
 
 En ese caso agregamos la definición del nuevo sector y agregamos las líneas para cada estación en la sección "2", vamos a asumir que la clase correspondiente es "85 - Urban/Recreational Grasses" y tendrá valores distintos en z0 ya que se calculan para cada sección, sin embargo comparte los valores de b0 y a0 con el sector 1 porque estos son calculados para la región de 10km x 10km. 
 

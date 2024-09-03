@@ -6,8 +6,6 @@ date: 2024-09-03
 ready: true
 ---
 
-# Aermap
-
 > Tutorial para ejecución de preprocesador de terreno del **AERMOD** (**AERMAP**)
 
 El **AERMAP** es un preprocesador del **AERMOD** que permite generar una grilla de receptores sobre un terreno complejo y calcular parámetros que permitan al **AERMOD** modelar la interacción de la pluma con el terreno.

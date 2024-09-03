@@ -2,7 +2,7 @@
 layout: lecture
 title: Aerpost
 descripcion: Post-procesador de aermod.
-date: 2024-09-02
+date: 2024-09-05
 ready: true
 ---
 

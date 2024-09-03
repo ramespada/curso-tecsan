@@ -1,0 +1,71 @@
+#!/bin/bash
+#==================================================================================================
+dir=/home/ram/github/gauss-ma/aermod
+#--------------------------------------------------------------------------------------------------
+#Corridas:
+PROYECTO=CEAMSE			  	#Nombre del proyecto:
+polluts=(ETHYLMERCAPTANO)
+periods=(MONTH)
+#--------------------------------------------------------------------
+#FECHAS:
+ini_date="2024-07-01"   #YYYY-MM-DD_HH:MM:SS (%Y-%m-%d_%H:%M:%s)
+end_date="2024-08-01"	#YYYY-MM-DD_HH:MM:SS (%Y-%m-%d_%H:%M:%s)
+tz=3			#time-zone
+#--------------------------------------------------------------------
+#DOMINIO/GRILLA
+epsg_latlon=4326	#latlon wgs84
+epsg_local=32721	#WGS-84 UTM Southern Hemisphere
+#clon=-58.6207262	#Punto central-LON
+#clat=-34.5252118 	#Punto central-LAT
+
+maxDistDominio=11000.0
+R=(2000.0 5000.0 $maxDistDominio)
+dx=(50.0 100.0 200.0)
+
+utm=-21
+Zflag=1.5
+#--------------------------------------------------------------------
+#METEOROLOGIA:
+id_sfc=87553
+id_up=87576 #87582 #
+#--------------------------------------------------------------------
+#SUPERFICIE (AERSURFACE)
+sfc_sec=(85 21 23 22 21 85)			 
+sfc_sec_start_angles=(0 30 90 120 180 240 360)  #desde el norte en sentido horario.
+sfc_seasons=(1 2 3 4)
+#--------------------------------------------------------------------
+#EMISORES
+inp_emis=EMIS/emis.csv
+#--------------------------------------------------------------------
+#INPUT FILES:
+inp_predio=gis/predio.csv
+inp_buildings= #gis/edificios.csv
+inp_emis=EMIS/emis.csv
+inp_dem=DEM/S35W059.tif #BA_LUJAN_DEM_5m.tif #BahiaBlanca_30m.tif #BA_30m.tif #BA_1arcdeg.tif
+inp_met_sfc=SFC/${id_sfc}*
+inp_met_up=UP/*.fsl
+#inp_lu=${dir}/data/LU/BA_lu_aermod.tif
+inp_rec=gis/receptores.csv #gridClipped.csv
+#--------------------------------------------------------------------
+#EXES:
+aermod_exe=${dir}/exe/AERMODv23132.EXE
+aermet_exe=${dir}/exe/AERMETv23132.EXE
+bpipprm_exe=${dir}/exe/BPIPPRMv04274.EXE
+aermap_exe=${dir}/exe/AERMAPv18081.EXE
+aersurface_exe=${dir}/exe/AERSURFACE20060.EXE
+#--------------------------------------------------------------------
+#URBAN?
+urban_bool=0            #1/0 (true/false)
+urban_name="" #nombre de ciudad
+urban_pop=         #habitantes
+urban_z0=1.0	        #roughnes length
+#RECEPTORES CUSTOM
+#--------------------------------------------------------------------
+## Site-specific (ONSITE)
+#inp_met_os=MET/g4.*
+#sfc_sec2=(85 21 23 22 21 85)			 
+#sfc_sec_start_angles2=(0 30 90 120 180 240 360)  #desde el norte en sentido horario.
+#sfc_seasons2=(1 2 3 4)
+#Site-specific:
+#os_vars="OSYR OSMO OSDY OSHR TSKC HT01"
+#os_format="(2X,4(I2,1X),F3.1,1X,F3.1)"

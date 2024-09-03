@@ -18,8 +18,8 @@ timezone: America/Argentina/Buenos_Aires
 collections:
   'clases':
     output: true
-  'ejemplos':
-    output: false
+  'casos':
+    output: true
   'material':       
     output: true
 
