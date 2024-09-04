@@ -5,15 +5,16 @@ nositetitle: true
 ---
 
 
-Esta es la página del curso de *Modelado de la calidad del aire* dictada para el personal ambiental de TECSAN.
-
+Esta pagina contiene material utilizado para la capacitación que Consultora Oeste ofrecio al personal ambiental de TECSAN durante el mes de septiembres sobre *Modelado de la calidad del aire*.
 
 ![](./static/media/imgs/tecsan.png)
 
-El objetivo del curso es exponer las bases para la implementación de modelos de calidad del aire especialmente enfocada en los procesos que tienen lugar en el complejo ambiental norte III.
+El objetivo del curso es exponer las bases para la implementación de modelos de calidad del aire especialmente enfocada en los procesos que tienen lugar dentro del *Complejo Ambiental Norte III*.
 
 
 # Cronograma
+
+Cada jornada consiste en una unidad teórica y una unidad práctica.
 
 |Día/Mes    | Turno/Hora  | Unidad                               |
 |:----------|:------------|:-------------------------------------|
@@ -27,7 +28,7 @@ El objetivo del curso es exponer las bases para la implementación de modelos de
 
 <br>
 
-Acá subiremos algo de [material](./material/) para profundizar los temas tratados.
+Acá subiremos algo de [bibliografía](./material/) para profundizar los temas tratados.
 
 ---
 

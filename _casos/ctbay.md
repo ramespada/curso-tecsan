@@ -3,7 +3,7 @@ layout: lecture
 title: CT-Buenayre
 descripcion: Central térmica BuenAyre.
 date: 2024-09-03
-ready: true
+ready: false
 ---
 
 > Ejecución de preprocesador de terreno del **AERMOD** (**AERMAP**)

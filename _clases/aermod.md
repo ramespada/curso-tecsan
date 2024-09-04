@@ -3,6 +3,7 @@ layout: lecture
 title: Aermod
 descripcion: Aermod
 date: 2024-09-04
+clase: 04
 ready: true
 ---
 

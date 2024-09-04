@@ -2,6 +2,7 @@
 layout: lecture
 title: Aermet
 descripcion: Preprocesador de meteorología.
+clase: 01
 date: 2024-09-02
 ready: true
 ---

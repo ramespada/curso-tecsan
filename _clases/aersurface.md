@@ -3,6 +3,7 @@ layout: lecture
 title: Aersurface
 descripcion: Prerpocesador de superficie.
 date: 2024-09-03
+clase: 02
 ready: true
 ---
 

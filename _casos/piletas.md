@@ -3,7 +3,7 @@ layout: lecture
 title: Piletas
 descripcion: Piletas de recolección tratamiento de lixiviados.
 date: 2024-09-03
-ready: true
+ready: false
 ---
 
 > Ejecución de preprocesador de terreno del **AERMOD** (**AERMAP**)

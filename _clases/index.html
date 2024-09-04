@@ -6,45 +6,37 @@ phony: true
 excerpt: '' # work around a bug
 ---
 
-
 <h2> Unidades teóricas: </h2>
 
+Presentaciones teóricas utilizadas:
 <ul>
-    <li><a href="./ppts/01-ectrans.pdf"   >Ecuación de transporte                  </a></li>
-    <li><a href="./ppts/03-gaussianos.pdf">Modelos Gaussianos                      </a></li>
-    <li><a href="./ppts/02-meteo.pdf"     >Nociones de meteorología de capa límite </a></li>
-    <li><a href="./ppts/04-aermod.pdf"    >Fundamentos de Aermod                   </a></li>
+    <li><a href="./ppts/01-ectrans.pdf"   >Ecuación de transporte      </a></li>
+    <li><a href="./ppts/03-gaussianos.pdf">Modelos Gaussianos          </a></li>
+    <li><a href="./ppts/02-meteo.pdf"     >Meteorología de capa límite </a></li>
+    <li><a href="./ppts/04-aermod.pdf"    >Fundamentos de Aermod       </a></li>
 </ul>
-<br>
 
 
 <h2> Unidades prácticas: </h2>
 
+Tutoriales para seguir durante las clases prácticas:
+
 <ul>
-  {% assign lectures = site['clases'] | sort: 'date' %}
+  {% assign lectures = site['clases'] | sort: 'clase'}
   {% for lecture in lectures %}
     {% if lecture.phony != true %}
+    {% if lecture.ready %}
       <li>
-        <strong>{{ lecture.date | date: '%d/%m' }}</strong>:
-        {% if lecture.ready %}
+        <strong>{{ lecture.clase }}</strong>:
           <a href="{{ site.baseurl }}{{ lecture.url }}">{{ lecture.title }}</a>
         {% if lecture.details %}
           <br>
           ({{ lecture.details }})
         {% endif %}
       </li>
-        {% endif %}
+    {% endif %}
     {% endif %}
   {% endfor %}
 </ul>
 
-<br>
 
-<h2> Casos de estudio: </h2>
-
-<ul>
-    <li><a href="_casos/relleno.md" >Relleno    </a></li>
-    <li><a href="_casos/tmb.md"     >TMB        </a></li>
-    <li><a href="_casos/piletas.md" >Piletas    </a></li>
-</ul>
-<br>
