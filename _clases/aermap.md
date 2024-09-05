@@ -72,7 +72,7 @@ Una versión ajustada a nuestro país es el modelo digital de elevación adaptad
 
 Vamos a descargar el producto *MDE 30m*, la grilla número: *3560-18*, ya que nuestro proyecto va a estar centrado en Ezeiza.
 
-![](/tut/imgs/IGN_MAPA.png)
+![](./imgs/IGN_MAPA.png)
 
 <!-- 
 ### Combinar DEMs:
@@ -85,7 +85,7 @@ gdal_merge.py 3557-13.img 3560-18.img -o merge.tif
 ### Reproyección de DEM:
 El DEM que descargaremos va a estar en sistema de coordenadas geográficas (lat,lon), pero vamos a necesitar convertirlo a un sistema proyectado para trabajar. Generalmente para Argentina usamos alguna faja UTM (Universal Transverse Mercator). Por lo tanto necesitamos transformar el archivo a el nuevo sistema de coordenadas:
 
-Para hacer la reproyección, necesitamos una herramienta extrena, puede ser un programa _GIS_ como *Qgis* o *ArcGis*, o herramientas específicas como gdal (que se incluyen al instalar Qgis). Si no logran hacer la reporyección, en [este link](/tut/archivos/aremap/3560-18-utm21s.tif) pueden bajar la capa proyectada en UTM21S. 
+Para hacer la reproyección, necesitamos una herramienta extrena, puede ser un programa _GIS_ como *Qgis* o *ArcGis*, o herramientas específicas como gdal (que se incluyen al instalar Qgis). Si no logran hacer la reporyección, en [este link](./archivos/aremap/3560-18-utm21s.tif) pueden bajar la capa proyectada en UTM21S. 
 
 Una forma de hacerlo desde la terminal o shell es utilizando el comando ``gdalwarp`` de la herramienta ``gdal`` (debe estar previamente instalado):
 <!-- 

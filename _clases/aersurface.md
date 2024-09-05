@@ -45,9 +45,9 @@ Esta clasificación de cobertura del suelo el USGS define las siguientes clases:
 
 Así se visualiza la clasificación de cobertura para un aeropuerto de estados unidos.
 
-![](/tut/imgs/aersurf_pizza.png)
+![](./imgs/aersurf_pizza.png)
 
-![](/tut/imgs/aersurf_pizza_nlcd.png)
+![](./imgs/aersurf_pizza_nlcd.png)
 
 Para determinar la clase dominante y sus parámetros asociados se debe analizar la siguiente información.
 
@@ -64,7 +64,7 @@ Para determinar la clase dominante y sus parámetros asociados se debe analizar 
 
 
 Entonces se podrían visualizar a continuación, las dos áreas analizadas.   
-![aersurface_radio](/tut/imgs/aersurface_radio.png)
+![aersurface_radio](./imgs/aersurface_radio.png)
 
 Cada sección va a representar una cobertura distinta, con parámetros de albedo, bowen y rugosidad distintas. En el anexo A de la guía de usuario de *AERSURFACE* se listan las tablas completas, a los fines de este tutorial, vamos a extraer y simplificar la información de algunas clases.
 
@@ -91,7 +91,7 @@ Cada sección va a representar una cobertura distinta, con parámetros de albedo
 |85| Urban/Recreational Grasses |0.02 |0.015 |0.01 | 0.015|
 
 Por ejemplo, para el caso de EZEIZA AERO, las áreas a analizar serían las siguientes:
-![](/tut/imgs/saez_al_bow_zo.png)
+![](./imgs/saez_al_bow_zo.png)
 
 En cuanto a cobertura, la mejor fuente de información disponible hasta el momento es la [clasificación de la agencia espacial europea](https://land.copernicus.eu/global/content/annual-100m-global-land-cover-maps-available) con resolución de 100mx100m y uso de clases de la FAO en vez del servicio geológico de estados unidos.
 
@@ -174,7 +174,7 @@ El contenido final de  ``AERSURFACE.OUT`` debería ser el siguiente:
 
 Podría darse un caso donde existan diferencias en las propiedades de superficie del radio de 1km a la fuente de información de velocidad del viento. 
 
-![](/tut/imgs/ejemplo_dos_sectores.png)
+![](./imgs/ejemplo_dos_sectores.png)
 
 En ese caso agregamos la definición del nuevo sector y agregamos las líneas para cada estación en la sección "2", vamos a asumir que la clase correspondiente es "85 - Urban/Recreational Grasses" y tendrá valores distintos en z0 ya que se calculan para cada sección, sin embargo comparte los valores de b0 y a0 con el sector 1 porque estos son calculados para la región de 10km x 10km. 
 

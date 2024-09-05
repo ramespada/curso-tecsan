@@ -22,19 +22,17 @@ Presentaciones teóricas utilizadas:
 Tutoriales para seguir durante las clases prácticas:
 
 <ul>
-  {% assign lectures = site['clases'] | sort: 'clase'}
+  {% assign lectures = site['clases'] | sort: 'clase' %}
   {% for lecture in lectures %}
-    {% if lecture.phony != true %}
     {% if lecture.ready %}
       <li>
         <strong>{{ lecture.clase }}</strong>:
           <a href="{{ site.baseurl }}{{ lecture.url }}">{{ lecture.title }}</a>
-        {% if lecture.details %}
-          <br>
-          ({{ lecture.details }})
-        {% endif %}
+          {% if lecture.details %}
+            <br>
+            ({{ lecture.details }})
+          {% endif %}
       </li>
-    {% endif %}
     {% endif %}
   {% endfor %}
 </ul>

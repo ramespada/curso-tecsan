@@ -18,7 +18,7 @@ Durante la ejecución del **AERMOD** y todos sus programas asociados vamos a tra
 Como vamos a estar modificando las extensiones de varios archivos, debemos asegurar que estas están visibles.
 En Windows 10, en el directorio de trabajo activamos esa opción desde la pestaña "Vista", tildando el casillero:"Extensiones de nombre de archivo".
 
-![](/tut/imgs/extensiones_win10.png)
+![](./imgs/extensiones_win10.png)
 
 
 ## Descarga de ejecutable
@@ -268,7 +268,7 @@ Se requieren informar las siguentes características de superficie del entorno d
 3. longitud de rugosidad de superficie $z_{0}$
    - En un radio de 1km a la estación meteorológica, se deben analizar 12 direcciones del viento o secciones de 30°. A cada sección se asigna como $z_{0}$ la media geométrica del valor de rugosidad ponderado de forma inversa a la distancia a la estación. 
 
-    En el apartado [AERSURFACE](//tut/aersurface.html) se desarrollan métodos equivalentes al preprocesador **AERSURFACE**, donde a partir de capas de información geográfica de cobertura del suelo, se infieren las propiedades de superficie. 
+    En el apartado [AERSURFACE](./aersurface.html) se desarrollan métodos equivalentes al preprocesador **AERSURFACE**, donde a partir de capas de información geográfica de cobertura del suelo, se infieren las propiedades de superficie. 
     En este caso vamos a informar directamente las propiedades de superficie asumiendo que estas propiedades son homogéneas para todas las direcciones del viento y constantes durante todo el año.
 
   Incluimos este texto al archivo de control:
