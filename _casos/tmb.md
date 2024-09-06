@@ -8,20 +8,25 @@ ready: true
 
 > Implementación de AERMOD para las planta de tratamiento mecánico-biológico.
 
-## Datos:
+## Datos
+
+Archivos especificos de este proyecto:
 - [Meteorología de superficie.](./data/875530-99999-2024.ish)
-- [Modelo digital de elvación.](./data/ceamse.tif)
+- [Modelo digital de elevación.](./data/ceamse.tif)
 - [Grilla de receptores.      ](./tmb/ceamse.rec)
 - [Emisiones.                 ](./tmb/gis/emis.csv)
 - [aersurface.out](./data/aersurface.out)
 
-## Archivos de control:
+## Archivos de control
+
+Archivos necesarios para configurar la ejecución de los programas:
 - aermet: [stg1.inp  ](./tmb/stg1.inp), [stg2.inp](./tmb/stg2.inp), [stg3.inp](./tmb/stg3.inp).
 - aermap: [aermap.inp](./tmb/aermap.inp)
 - aermod: [aermod.inp](./tmb/aermod.inp)
 
 
-## Pasos para ejecución:
+## Pasos para ejecución
+
 Para ejecutar este proyecto necesitamos:
 1. Descargar ejecutables.
 2. Definir dominio de estudio, límites del predio y grilla de receptores en sistema de coordenadas plano (proyectado).

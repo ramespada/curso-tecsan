@@ -5,30 +5,31 @@ nositetitle: true
 ---
 
 
-Esta pagina contiene material utilizado para la capacitación que Consultora Oeste ofrecio al personal ambiental de TECSAN durante el mes de septiembres sobre *Modelado de la calidad del aire*.
+Esta pagina contiene material utilizado para la capacitación que Consultora Oeste ofrecio al personal ambiental de TECSAN durante el mes de septiembres del 2024 sobre *Modelado de la calidad del aire*.
 
 ![](./static/media/imgs/tecsan.png)
 
-El objetivo del curso es exponer las bases para la implementación de modelos de calidad del aire especialmente enfocada en los procesos que tienen lugar dentro del *Complejo Ambiental Norte III*.
+El objetivo del curso fue exponer las bases para la implementación de modelos de calidad del aire especialmente enfocada en los procesos que tienen lugar dentro del *Complejo Ambiental Norte III*.
 
+---
 
 # Cronograma
 
-Cada jornada consiste en una unidad teórica y una unidad práctica.
+Cada jornada consistió en una unidad teórica y una unidad práctica.
 
-|Día/Mes    | Turno/Hora  | Unidad                               |
-|:----------|:------------|:-------------------------------------|
-|  02/09    | Mañana      | Introducción y Meteorología de CL.   |
-|           | Tarde       | Preparación de corrida.              |
-|  03/09    | Mañana      | Fundamentos de AERMOD                |
-|           | Tarde       | Ejecucción de AERMOD                 |
-|  04/09    | Mañana      | Emisiones: estimación y reducción.   |
-|           | Tarde       | Post-procesamiento                   |
+| Fecha&nbsp;&nbsp;&nbsp;| Turno &nbsp;&nbsp;&nbsp;| Unidad                          |
+|:--------------------|:-----------------------|:-----------------------------------|
+|  02/09              | Mañana                 | Intro. y Meteorología de CL.       |
+|                     | Tarde                  | Preparación de corrida.            |
+|  04/09              | Mañana                 | Fundamentos de AERMOD              |
+|                     | Tarde                  | Ejecucción de AERMOD               |
+|  06/09              | Mañana                 | Emisiones: estimación y reducción. |
+|                     | Tarde                  | Post-procesamiento                 |
 
 
 <br>
 
-Acá subiremos algo de [bibliografía](./material/) para profundizar los temas tratados.
+En [material](./material/) podes encontrar bibliografía para profundizar los temas tratados.
 
 ---
 

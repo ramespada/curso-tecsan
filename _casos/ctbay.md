@@ -8,7 +8,7 @@ ready: true
 
 > Implementación de AERMOD para la central de biogás.
 
-## Datos:
+## Datos
 
 Archivos especificos de este proyecto:
 - [Meteorología de superficie. ](./data/875530-99999-2024.ish)
@@ -18,7 +18,7 @@ Archivos especificos de este proyecto:
 - [Edificios.                  ](./ctbay/gis/emis.csv)
 - [aersurface.out              ](./data/aersurface.out)
 
-## Archivos de control:
+## Archivos de control
 
 Archivos necesarios para configurar la ejecución de los programas:
 - aermet: [stg1.inp  ](./ctbay/stg1.inp), [stg2.inp](./ctbay/stg2.inp), [stg3.inp](./ctbay/stg3.inp).
@@ -27,7 +27,7 @@ Archivos necesarios para configurar la ejecución de los programas:
 - aermod: [aermod.inp](./ctbay/aermod.inp)
 
 
-## Pasos para ejecución:
+## Pasos para ejecución
 
 Para ejecutar este proyecto necesitamos:
 1. Descargar ejecutables.
