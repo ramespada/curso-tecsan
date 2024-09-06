@@ -6,7 +6,6 @@ phony: true
 excerpt: '' # work around a bug
 ---
 
-
 Casos de aplicacicón de fuentes emisoras dentro del predio.
 
 <ul>

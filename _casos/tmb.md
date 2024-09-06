@@ -1,7 +1,7 @@
 --- 
 layout: lecture
 title: TMB
-descripcion: Planta de tratamiento mecánico-biológico.
+description: Planta de tratamiento mecánico-biológico.
 date: 2024-09-03
 ready: true
 ---
@@ -13,9 +13,9 @@ ready: true
 - [Modelo digital de elvación.](./data/ceamse.tif)
 - [Grilla de receptores.      ](./tmb/ceamse.rec)
 - [Emisiones.                 ](./tmb/gis/emis.csv)
+- [aersurface.out](./data/aersurface.out)
 
 ## Archivos de control:
-- aersurface: [aersurface.out](./data/aersurface.out)
 - aermet: [stg1.inp  ](./tmb/stg1.inp), [stg2.inp](./tmb/stg2.inp), [stg3.inp](./tmb/stg3.inp).
 - aermap: [aermap.inp](./tmb/aermap.inp)
 - aermod: [aermod.inp](./tmb/aermod.inp)
@@ -23,12 +23,12 @@ ready: true
 
 ## Pasos para ejecución:
 Para ejecutar este proyecto necesitamos:
-1. Descargar los ejecutables.
-2. Definir dominio de estudio y grilla de receptores en sistema de coordenadas plano (proyectado).
-3. Descargar un [modelo digital de elevación](https://www.ign.gob.ar/NuestrasActividades/Geodesia/ModeloDigitalElevaciones/Mapa) (DEM) que contenga el domino que queremos modelar.
-4. Reproyectar DEM a sistema de coordenadas definido en el punto 2.
-5. Construir un archivo de control para el aermap: [``aermap.inp``](archivos/aermod/aermap.inp)
-6. Colocar todos los archivos mencionados en un directorio común.
-7. Ejecutar el aermap haciendo doble click sobre el ejecutable o si están en la shell: `` ./aermap.exe < aermap.inp``.
-
-
+1. Descargar ejecutables.
+2. Definir dominio de estudio, límites del predio y grilla de receptores en sistema de coordenadas plano (proyectado).
+3. Descargar archivos meteorológicos de superficie del [Integrated Surface Database (ISD)](https://www.ncei.noaa.gov/pub/data/noaa/). Y radiosondeos de de [NOAA/ESRL Radiosonde Database](https://ruc.noaa.gov/raobs). Buscar archivos por `id` de la estación y año.
+4. Descargar [modelo digital de elevación](https://www.ign.gob.ar/NuestrasActividades/Geodesia/ModeloDigitalElevaciones/Mapa) (DEM) que contenga el domino que queremos modelar. Reproyectar DEM a sistema de coordenadas definido en el punto 2.
+5. Descargar ó construir el archivo `aersurface.out` en base a la cobertura de suelo en las cercanías de la estación de superficie.
+6. Descargar y completar los **archivos de control** (`stg1.inp`, `stg2.inp`, `stg3.inp`,`aermap.inp`, `bpip.inp`, `aermod.inp`).
+7. Colocar todos los archivos mencionados en un directorio común.
+8. Ejecutar programas haciendo doble click sobre el ejecutable o si están en la shell, por ejemplo: ``./aermod.exe < aermod.inp``. El orden recomendado de ejecución es: 1) aersurface 2) aermet, 3) aermap, 4) bpip, 5) aermod.
+9. Post-procesar salidas para crear mapas, gráficos y tablas.
