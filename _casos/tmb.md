@@ -12,8 +12,8 @@ ready: true
 
 Archivos especificos de este proyecto:
 - [Meteorología de superficie.](./data/875530-99999-2024.ish)
-- [Modelo digital de elevación.](./data/ceamse.tif)
-- [Grilla de receptores.      ](./tmb/ceamse.rec)
+- [Modelo digital de elevación.](./data/CEAMSE.tif)
+- [Grilla de receptores.      ](./tmb/tmb.rec)
 - [Emisiones.                 ](./tmb/gis/emis.csv)
 - [aersurface.out](./data/aersurface.out)
 
