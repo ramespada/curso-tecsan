@@ -6,27 +6,19 @@ date: 2024-09-03
 ready: false
 ---
 
-> Ejecución de preprocesador de terreno del **AERMOD** (**AERMAP**)
+> Implementación de AERMOD para las piletas de lixiviados.
 
 ## Datos:
-- [Meteorología de superficie.](./piletas/875530-99999-2024)
-- [Modelo digital de elvación.](./piletas/ceamse.tif)
-- [Grilla de receptores.      ](./piletas/ceamse.rec)
-- [Emisiones.                 ](./piletas/emis.csv)
+- [Meteorología de superficie.](./data/875530-99999-2024)
+- [Modelo digital de elvación.](./data/ceamse.tif)
+- [Grilla de receptores.      ](./piletas/piletas.rec)
+- [Emisiones.                 ](./piletas/gis/emis.csv)
 
 ## Archivos de control:
 
 - aermet: [stg1.inp  ](./piletas/stg1.inp), [stg2.inp](./piletas/stg2.inp), [stg3.inp](./piletas/stg3.inp).
 - aermap: [aermap.inp](./piletas/aermap.inp)
 - aermod: [aermod.inp](./piletas/aermod.inp)
-
-
-## Ejecutables:
-
-- [aermet.exe](https://gaftp.epa.gov/Air/aqmg/SCRAM/models/related/aermap/aermap_exe.zip).
-- [aermap.exe](https://gaftp.epa.gov/Air/aqmg/SCRAM/models/related/aermap/aermap_exe.zip).
-- [aermod.exe](https://gaftp.epa.gov/Air/aqmg/SCRAM/models/related/aermap/aermap_exe.zip).
-
 
 ## Pasos para ejecución:
 Para ejecutar este proyecto necesitamos:

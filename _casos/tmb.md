@@ -6,26 +6,19 @@ date: 2024-09-03
 ready: true
 ---
 
-> Ejecución de preprocesador de terreno del **AERMOD** (**AERMAP**)
+> Implementación de AERMOD para las planta de tratamiento mecánico-biológico.
 
 ## Datos:
-- [Meteorología de superficie.](./tmb/875530-99999-2024)
-- [Modelo digital de elvación.](./tmb/ceamse.tif)
+- [Meteorología de superficie.](./data/875530-99999-2024.ish)
+- [Modelo digital de elvación.](./data/ceamse.tif)
 - [Grilla de receptores.      ](./tmb/ceamse.rec)
-- [Emisiones.                 ](./tmb/emis.csv)
+- [Emisiones.                 ](./tmb/gis/emis.csv)
 
 ## Archivos de control:
-
+- aersurface: [aersurface.out](./data/aersurface.out)
 - aermet: [stg1.inp  ](./tmb/stg1.inp), [stg2.inp](./tmb/stg2.inp), [stg3.inp](./tmb/stg3.inp).
 - aermap: [aermap.inp](./tmb/aermap.inp)
 - aermod: [aermod.inp](./tmb/aermod.inp)
-
-
-## Ejecutables:
-
-- [aermet.exe](https://gaftp.epa.gov/Air/aqmg/SCRAM/models/related/aermap/aermap_exe.zip).
-- [aermap.exe](https://gaftp.epa.gov/Air/aqmg/SCRAM/models/related/aermap/aermap_exe.zip).
-- [aermod.exe](https://gaftp.epa.gov/Air/aqmg/SCRAM/models/related/aermap/aermap_exe.zip).
 
 
 ## Pasos para ejecución:

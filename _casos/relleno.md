@@ -6,26 +6,20 @@ date: 2024-09-03
 ready: true
 ---
 
-> Ejecución de preprocesador de terreno del **AERMOD** (**AERMAP**)
+> Implementación de AERMOD para las zonas de descarga.     
 
 ## Datos:
-- [Meteorología de superficie.](./relleno/875530-99999-2024)
-- [Modelo digital de elvación.](./relleno/ceamse.tif)
+- [Meteorología de superficie.](./data/875530-99999-2024.ish)
+- [Modelo digital de elvación.](./data/ceamse.tif)
 - [Grilla de receptores.      ](./relleno/ceamse.rec)
 - [Emisiones.                 ](./relleno/emis.csv)
 
 ## Archivos de control:
 
+- aersurface: [aersurface.out](./data/aersurface.out)
 - aermet: [stg1.inp  ](./relleno/stg1.inp), [stg2.inp](./relleno/stg2.inp), [stg3.inp](./relleno/stg3.inp).
 - aermap: [aermap.inp](./relleno/aermap.inp)
 - aermod: [aermod.inp](./relleno/aermod.inp)
-
-
-## Ejecutables:
-
-- [aermet.exe](https://gaftp.epa.gov/Air/aqmg/SCRAM/models/related/aermap/aermap_exe.zip).
-- [aermap.exe](https://gaftp.epa.gov/Air/aqmg/SCRAM/models/related/aermap/aermap_exe.zip).
-- [aermod.exe](https://gaftp.epa.gov/Air/aqmg/SCRAM/models/related/aermap/aermap_exe.zip).
 
 
 ## Pasos para ejecución:
