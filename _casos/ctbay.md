@@ -15,7 +15,7 @@ Archivos especificos de este proyecto:
 - [Modelo digital de elevación.](./data/ceamse.tif)
 - [Grilla de receptores.       ](./ctbay/ctbay.rec)
 - [Emisiones.                  ](./ctbay/gis/emis.csv)
-- [Edificios.                  ](./ctbay/gis/emis.csv)
+- [Edificios.                  ](./ctbay/gis/edificios.csv)
 - [aersurface.out              ](./data/aersurface.out)
 
 ## Archivos de control
