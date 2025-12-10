@@ -16,7 +16,7 @@ Archivos especificos de este proyecto:
 - Grilla de receptores AERMAP (ROU): [TCS.ROU](./data/TCS.ROU) 
 
 ## Pasos para ejecución
-
+<!--
 ### AERMET
 
 1. Abrir "AERMET View": <img src="./imgs/icons/aermet_view.png" width="60px" />
@@ -29,21 +29,22 @@ Por ejemplo:
 |----------------|-------|
 | Folder location| `C:\Curso_AERMOD\Prueba\Met`   |
 | Project name   | Relleno                        |
-
+-->
 ### AERMOD
 
-1. Abrir "AERMET View": <img src="./imgs/icons/aermet_view.png" width="60px" />. Aparecerá una ventana de inició, hacer click en "OK" (abajo a la izquierda).
+1. Abrir **AERMOD View** <img src="./imgs/icons/aermod.png" width="60px" />. 
+Aparecerá una ventana de inició, hacer click en "OK" (abajo a la izquierda).
 
-2. Crear un proyecto nuevo haciendo click en "New"  <img src="./imgs/icons/new.png" width="60px"/>
+2. **Crear proyecto** haciendo click en "New"  <img src="./imgs/icons/new.png" width="60px"/>
 
-3. Especificar ubicación y nombre del archivo del proyecto. Por ejemplo:
+- Especificar ubicación y nombre del archivo del proyecto. Por ejemplo:
 
 | Parametro       | Valor |
 |-----------------|-------|
 | Project location| `C:\Curso_AERMOD\TCS\`   |
 | Project name    | TCS                      |
 
-4. Especificar Proyección y sistema de coordenadas:
+- Especificar Proyección y sistema de coordenadas:
 
 | Parametro       | Valor |
 |-----------------|-------|
@@ -52,7 +53,7 @@ Por ejemplo:
 | UTM-Zone        | 21                                 |
 | Hemisphere      | South (S)                          |
 
-5. Especificar Parámetros de dominio:
+- Especificar Parámetros de dominio:
 
 | Parametro       | Valor |
 |-----------------|-------|
@@ -61,22 +62,27 @@ Por ejemplo:
 | Ref. point (Position)  | Center         |
 | Radius for Mod. Area   | 13 km          |
 
-6. Revisar, y al terminar clickiar en el botón de `Finnish`. 
+- Revisar, y al terminar clickiar en el botón de `Finnish`. 
 
 
-7. Setiar parámetros globales    <img src="./imgs/icons/control.png"  width="60px"/>
-Dejar valores por defecto, seleccionar periodos de promediado deseados, usar la opcion de terreno elevado.
+3. **Parámetros globales**  <img src="./imgs/icons/control.png"  width="60px"/>
+- Dejar valores por defecto, 
+- seleccionar periodos de promediado deseados, 
+- usar la opcion de terreno elevado.
 
-8. Crear fuentes de emisión      <img src="./imgs/icons/source.png"   width="60px"/>
+4. **Emisiones** <img src="./imgs/icons/source.png"   width="60px"/>
+- Con la opción de "Polygon area source" dibujar la fuente de emisión, al terminar setiar los parámetros de emisión deseados.
 
-9. Definir grillas de receptores <img src="./imgs/icons/receptor.png" width="60px"/>
+5. **Receptores** <img src="./imgs/icons/receptor.png" width="60px"/>
+- Importar receptores (Buscar el archivo `TCS.ROU`)
 
-10. Cargar meteorología          <img src="./imgs/icons/met.png"      width="60px"/>
+6. **Meteorología** <img src="./imgs/icons/met.png"      width="60px"/>
+- Importar archivos de superficie (`TCS.SFC`) y de perfil (`TCS.PFL`)
 
-11. Opciones de salida           <img src="./imgs/icons/output.png"   width="60px"/>
+7. **Opciones de salida** <img src="./imgs/icons/output.png"   width="60px"/>
+- Dejar valores dados por defecto.
 
-12. Terreno/Topografía           <img src="./imgs/icons/terrain.png"  width="60px"/>
-
+<!-- 8. **Terreno/Topografía** <img src="./imgs/icons/terrain.png"  width="60px"/> -->
 
 
 
