@@ -2,8 +2,9 @@
 layout: lecture
 title: AERMOD View
 description: Ejecución de AERMOD View.
-date: 2024-09-03
+date: 2025-12-15
 ready: true
+view: true
 ---
 
 > Implementación de AERMOD View para las zonas de descarga.
