@@ -51,10 +51,11 @@ Aparecerá una ventana de inició, hacer click en "OK" (abajo a la izquierda).
 | Ref. point (Position)  | Center         |
 | Radius for Mod. Area   | 13 km          |
 
-- Revisar, y al terminar clickiar en el botón de `Finnish`. 
+- Revisar, y al terminar clickiar en el botón de `Finish`. Al hacerlo deberian ver algo asi:
 
+![](./imgs/aermod_view_screen.png)
 
-4. **Meteorología de superficie** <img src="./imgs/icons/susrface.png"   width="60px"/>
+4. **Meteorología de superficie** <img src="./imgs/icons/surface.png"   width="60px"/>
 - Importar archivos meteorológicos de superficie (ISH)
 
 5. **Radiosondeos** <img src="./imgs/icons/upperair.png" width="60px"/>
