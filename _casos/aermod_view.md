@@ -43,8 +43,8 @@ Aparecerá una ventana de inició, hacer click en "OK" (abajo a la izquierda).
 
 | Parametro       | Valor |
 |:----------------|:-----:|
-| **Ref. point (Lat )**  |  34.5282252 (S)| 
-| **Ref. point (Long)**  |  58.6265442 (W)|
+| **Ref. point**  | X: 351788  ó Lat :34.5282252 (S)| 
+| **Ref. point**  | Y: 6175587 ó Long:58.6265442 (W)|
 | **Ref. point (Position)**  | Center         |
 | **Radius for Mod. Area**  | 13 km          |
 
@@ -59,8 +59,8 @@ La barra horizontal superior muestra las distintas etapas a ir completando para 
 
 3. **Parámetros globales**  <img src="./imgs/icons/control.png"  width="60px"/>
 - Dejar valores por defecto, 
-- seleccionar periodos de promediado deseados, 
-- usar la opcion de terreno elevado.
+- Seleccionar periodos de promediado deseados (por ejemplo: 1 hr, 24hr, full period) 
+- Elegir la opcion de terreno elevado
 
 4. **Emisiones** <img src="./imgs/icons/source.png"   width="60px"/>
 En la pantalla principal, a la izquierda hay una barra vertical que nos permite definir distintos tipos de fuentes y ubicarlas en espacialmente usando el mouse y clickiando en el mapa.
@@ -68,8 +68,7 @@ En la pantalla principal, a la izquierda hay una barra vertical que nos permite 
 ![](./imgs/sources_bar.png)
 
 
-Usar el botón de "Polygon area source" y dibujar con el mouse la fuente de emisión areal. Usar el botón derecho del mouse para definir cada vertice y al terminar presionar el botón izquierdo del mouse. Al terminar se abrira una ventana que nos permitirá setiar los parámetros de emisión deseados:
-
+Usar el botón de `Polygon area source` y dibujar con el mouse la fuente de emisión areal. Usar el botón derecho del mouse para ubicar cada vértice y al terminar presionar el botón izquierdo del mouse. Al terminar se abrira una ventana que nos permitirá setiar los parámetros de emisión deseados:
 
 ![](./imgs/area_source_screen.png)
 
@@ -86,6 +85,7 @@ Usar el botón de "Polygon area source" y dibujar con el mouse la fuente de emis
 
 7. **Opciones de salida** <img src="./imgs/icons/output.png"   width="60px"/>
 - Dejar valores dados por defecto.
+
 ![](./imgs/output_screen.png)
 
 8. **Ejecutar**  <img src="./imgs/icons/run.png"   width="60px"/>
