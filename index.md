@@ -5,7 +5,7 @@ nositetitle: true
 ---
 
 
-Esta pagina contiene material utilizado para la capacitación que Consultora Oeste ofrecio al personal ambiental de TECSAN durante el mes de septiembres del 2024 sobre *Modelado de la calidad del aire*.
+Esta pagina contiene material utilizado para la capacitación que Consultora Oeste ofrecio al personal ambiental de TECSAN durante el mes de septiembres del 2026 sobre *Modelado de la calidad del aire*.
 
 ![](./static/media/imgs/tecsan.png)
 
@@ -17,14 +17,14 @@ El objetivo del curso fue exponer las bases para la implementación de modelos d
 
 Cada jornada consistió en una unidad teórica y una unidad práctica.
 
-| Fecha&nbsp;&nbsp;&nbsp;| Turno &nbsp;&nbsp;&nbsp;| Unidad                          |
-|:--------------------|:-----------------------|:-----------------------------------|
-|  02/09              | Mañana                 | Intro. y Meteorología de CL.       |
-|                     | Tarde                  | Preparación de corrida.            |
-|  04/09              | Mañana                 | Fundamentos de AERMOD              |
-|                     | Tarde                  | Ejecucción de AERMOD               |
-|  06/09              | Mañana                 | Emisiones: estimación y reducción. |
-|                     | Tarde                  | Post-procesamiento                 |
+| Fecha&nbsp;&nbsp;&nbsp;| Turno &nbsp;&nbsp;&nbsp;| Unidad                        |
+|:--------------------|:-----------------------|:----------------------------------|
+|  21/09              | Mañana                 | Intro. & modelos gausianos.       |
+|                     | Tarde                  | Preparación de corrida de prueba  |
+|  22/09              | Mañana                 | Meteo. de CL & Fundam. de AERMOD  |
+|                     | Tarde                  | Ejecucción de AERMOD              |
+| A definir           | Mañana                 | Estimación de emisiones           |
+|                     | Tarde                  | Post-procesamiento                |
 
 
 <br>

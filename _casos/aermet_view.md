@@ -13,8 +13,8 @@ view: true
 
 Archivos especificos de este proyecto:
 
-- Descargar archivos meteorológicos de superficie del [Integrated Surface Database (ISD)](https://www.ncei.noaa.gov/pub/data/noaa/). 
-- Descargar archivos meteorologicos de radiosondeos de [NOAA/ESRL Radiosonde Database](https://ruc.noaa.gov/raobs). Buscar archivos por `id` de la estación y año.
+- Descargar archivos meteorológicos de superficie de [Global Historical Climatology Network (GHCNh)](https://www.ncei.noaa.gov/oa/global-historical-climatology-network/index.html#hourly/access/by-year/)
+- Descargar archivos meteorológicos de radiosondeos de [Integrated Global Radiosonde Archive (IGRA)](https://www.ncei.noaa.gov/pub/data/igra/data/data-por/)
 - Descargar archivos meteorológicos de [estación local Davis](https://www.weatherlink.com/bulletin/d546f3c5-bc92-4c2c-af0e-3ada6d2027d4)
 - [AERSURFACE.OUT](./data/aersurface.out)
 
