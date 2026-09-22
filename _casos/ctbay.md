@@ -32,7 +32,7 @@ Archivos necesarios para configurar la ejecución de los programas:
 Para ejecutar este proyecto necesitamos:
 1. Descargar ejecutables.
 2. Definir dominio de estudio, límites del predio y grilla de receptores en sistema de coordenadas plano (proyectado).
-3. Descargar archivos meteorológicos de superficie del [Integrated Surface Database (ISD)](https://www.ncei.noaa.gov/pub/data/noaa/). Y radiosondeos de de [NOAA/ESRL Radiosonde Database](https://ruc.noaa.gov/raobs). Buscar archivos por `id` de la estación y año.
+3. Descargar archivos meteorológicos de superficie del [Global Historical Climatology Network (GHCNh)](https://www.ncei.noaa.gov/oa/global-historical-climatology-network/index.html#hourly/access/by-year/) y radiosondeos de [Integrated Global Radiosonde Archive (IGRA)](https://www.ncei.noaa.gov/pub/data/igra/data/data-por/) buscar archivos por `id` de la estación y año.
 4. Descargar [modelo digital de elevación](https://www.ign.gob.ar/NuestrasActividades/Geodesia/ModeloDigitalElevaciones/Mapa) (DEM) que contenga el domino que queremos modelar. Reproyectar DEM a sistema de coordenadas definido en el punto 2.
 5. Descargar ó construir el archivo `aersurface.out` en base a la cobertura de suelo en las cercanías de la estación de superficie.
 6. Descargar y completar los **archivos de control** (`stg1.inp`, `stg2.inp`, `stg3.inp`,`aermap.inp`, `bpip.inp`, `aermod.inp`).
